@@ -6,8 +6,7 @@ const Navbar: React.FC = () => {
     return (
         <IconContext.Provider value={{ color: "white" }}>
             <nav className="w-screen h-[50px] px-14 flex flex-row justify-between items-center gap-5 bg-gray-800">
-                <div className="flex flex-row gap-5 items-center text-yellow-300 text-2xl font-bold italic">
-                    <RxHamburgerMenu />
+                <div className="text-yellow-300 text-2xl font-bold italic">
                     <a href="/">Forgers™</a>
                 </div>
                 <div className="flex flex-row gap-10 items-center">
