@@ -1,19 +1,7 @@
 import { useFetch } from "../../utils/useFetch"
+import type { Product } from "../../types/Types";
+import ProductCard from "./ProductCard";
 
-type Product = {
-    id: number;
-    title: string;
-    price: number;
-    description: string;
-    category: string;
-    image: string;
-    rating: Rating;
-} 
-
-type Rating = {
-    rate: number;
-    count: number;
-}
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product[]>('https://fakestoreapi.com/products');
 
@@ -22,11 +10,20 @@ const Products: React.FC = () => {
 
 
     return (
-        <ul>
+        <div className="grid grid-cols-4 gap-8 p-3 items-stretch">
             {products?.map(product => (
-                <li key={product.id}>{product.title}</li>
+                <ProductCard 
+                key={product.id} 
+                id={product.id}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                category={product.category}
+                image={product.image}
+                rating={product.rating}
+                />
             ))}
-        </ul>
+        </div>
     )
 }
 
