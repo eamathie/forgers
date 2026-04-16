@@ -10,7 +10,7 @@ const Products: React.FC = () => {
 
 
     return (
-        <div className="grid grid-cols-4 gap-8 p-3 items-stretch">
+        <div className="grid grid-cols-4 gap-8 p-3 items-stretch mx-20">
             {products?.map(product => (
                 <ProductCard 
                 key={product.id} 
