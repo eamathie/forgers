@@ -1,9 +1,9 @@
-import StylingTest from "./components/StylingTest";
+import Products from "./components/products/Products";
 
 export default function App() {
   return (
-    <div>
-      <StylingTest />
-    </div>
+    <>
+      <Products />
+    </>
   )
 }
