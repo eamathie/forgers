@@ -4,7 +4,7 @@ import { IconContext } from "react-icons";
 const Navbar: React.FC = () => {
     return (
         <IconContext.Provider value={{ color: "white" }}>
-            <nav className="w-screen h-[50px] px-14 flex flex-row justify-between items-center gap-5 bg-gray-800">
+            <nav className="h-[50px] px-20 flex flex-row justify-between items-center gap-5 bg-gray-800">
                 <div className="text-yellow-300 text-2xl font-bold italic">
                     <a href="/">Forgers™</a>
                 </div>
@@ -15,6 +15,8 @@ const Navbar: React.FC = () => {
                         <li className="hover:underline"><a href="*">About</a></li>
                         <li className="hover:underline"><a href="*">Contact</a></li>
                     </ul>
+                </div>
+                <div>
                     <FaRegUser />
                 </div>
             </nav>
