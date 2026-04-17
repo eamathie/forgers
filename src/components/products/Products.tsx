@@ -8,22 +8,32 @@ import CategorySelector from "./filtering/CategorySelector";
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product[]>('https://fakestoreapi.com/products');
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [selectedCategory, setSelectedCategory] = useState<string>("");
+    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+
+    // implicitly update selectedCategories array when CategorySelector checkboxes are changed
+    const updateSelectedCategories = (value: string) => {
+        setSelectedCategories(prev => {
+            if (prev.some(e => e === value)) 
+                return prev.filter(e => e !== value)
+            else 
+                return [...prev, value]
+        })
+    }
 
     if (loading) return <div>Loading products...</div>;
     if (error) return <div>Error: {error.message}</div>;
-
+    
     const categories = [... new Set(products?.map(p => p.category))];
 
     return (
         <div className="flex flex-col mx-20 gap-5 p-3">
-            <div className="flex flex-row">
+            <div className="flex flex-row gap-5">
+                <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
                 <Searchbar onChange={setSearchQuery} />
-                <CategorySelector setSelectedCategory={setSelectedCategory} categories={categories}/>
             </div>
             <div className="grid grid-cols-4 gap-8 ">
-                {products?.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase()))
-                .filter(product => selectedCategory !== "" ? product.category === selectedCategory : true)
+                {products?.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase())) // filter on search query
+                .filter(product => selectedCategories.length === 0 || selectedCategories.some(c => c.toLowerCase() === product.category.toLowerCase())) // filter on categories, show all if no category is selected
                 .map(product => (
                     <ProductCard 
                     key={product.id} 

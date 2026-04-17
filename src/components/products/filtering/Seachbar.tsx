@@ -5,7 +5,7 @@ interface SearchBarProps {
 const Searchbar: React.FC<SearchBarProps> = ({ onChange }) => {
     return (
         <input 
-        className="border-2 rounded-lg px-2"
+        className="h-1/2 border-2 rounded-lg px-2"
         name="seachBar"
         placeholder="search..."
         onChange={(e) => onChange(e.target.value)}
