@@ -25,10 +25,6 @@ const Products: React.FC = () => {
         })
     }
 
-    useEffect(() => {
-        console.log(selectedSortOptions);
-    }, [selectedSortOptions])
-
     const handleSelected = (title: string, option: string) => {
         setSelectedSortOptions(prev => {
             if (prev.some(o => o.title === title))
