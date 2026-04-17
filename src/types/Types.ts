@@ -14,4 +14,8 @@ export type Rating = {
     count: number;
 }
 
-// Expand here
+// Radio button list
+export type RadioButtonList = {
+    title: string,
+    options: string[]
+}

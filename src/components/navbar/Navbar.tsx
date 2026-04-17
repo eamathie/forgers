@@ -1,4 +1,3 @@
-import { RxHamburgerMenu } from "react-icons/rx";
 import { FaRegUser } from "react-icons/fa";
 import { IconContext } from "react-icons";
 
@@ -11,10 +10,10 @@ const Navbar: React.FC = () => {
                 </div>
                 <div className="flex flex-row gap-10 items-center">
                     <ul className="flex flex-cols gap-8 text-gray-200">
-                        <li><a href="*">Store</a></li>
-                        <li><a href="*">Exclusive deals</a></li>
-                        <li><a href="*">About</a></li>
-                        <li><a href="*">Contact</a></li>
+                        <li className="hover:underline"><a href="*">Store</a></li>
+                        <li className="hover:underline"><a href="*">Exclusive deals</a></li>
+                        <li className="hover:underline"><a href="*">About</a></li>
+                        <li className="hover:underline"><a href="*">Contact</a></li>
                     </ul>
                     <FaRegUser />
                 </div>

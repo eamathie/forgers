@@ -4,9 +4,11 @@ import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
 import { useState } from "react";
 import CategorySelector from "./filtering/CategorySelector";
+import { URIProductsAll } from "../../utils/fake_store_api/Products";
+import DropdownCollection from "./sorting/DropdownCollection";
 
 const Products: React.FC = () => {
-    const {data: products, loading, error } = useFetch<Product[]>('https://fakestoreapi.com/products');
+    const {data: products, loading, error } = useFetch<Product[]>(URIProductsAll);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
@@ -30,6 +32,7 @@ const Products: React.FC = () => {
             <div className="flex flex-row gap-5">
                 <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
                 <Searchbar onChange={setSearchQuery} />
+                <DropdownCollection />
             </div>
             <div className="grid grid-cols-4 gap-8 ">
                 {products?.filter(product => product.title.toLowerCase().includes(searchQuery.toLowerCase())) // filter on search query
