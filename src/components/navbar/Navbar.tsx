@@ -9,11 +9,33 @@ const Navbar: React.FC = () => {
     const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
 
     // Wrapper component that highlights child icon when clicked. HighlightOn: boolean to listen to, highlights when true. Pass false if icon should never highlight
-    const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean }> = ({ children, highlightOn }) => {
+    const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean, onClick?: () => void }> = ({ children, highlightOn, onClick }) => {
         return(
-            <div className={`cursor-pointer hover:bg-gray-600 w-8 h-8 flex items-center justify-center rounded-full ${highlightOn && "bg-gray-600"}`}>
+            <div 
+            className={`cursor-pointer hover:bg-gray-600 w-8 h-8 relative flex items-center justify-center rounded-full ${highlightOn && "bg-gray-600"}`}
+            onClick={onClick}>
                 {children}
             </div>
+        )
+    }
+
+    // The tiny numbered dot that appears on top of the shopping cart symbol when it holds items
+    const CartNumberedCircle: React.FC<{number: number}> = ({ number }) => {
+        return (
+            <span className={`
+                absolute
+                top-0
+                right-0
+                w-3 h-3
+                rounded-full
+                bg-red-500
+                text-white
+                ${number >= 10 && number < 100 ? "text-[8px]" : "text-[10px]"}
+                flex items-center justify-center
+                pointer-events-none
+            `}>
+                {number < 100 ? number : "∞"}
+            </span>
         )
     }
 
@@ -31,12 +53,13 @@ const Navbar: React.FC = () => {
                         <li className="hover:underline"><a href="*">Contact</a></li>
                     </ul>
                 </div>
-                <div className="flex flex-row items-center gap-3">
+                <div className="flex flex-row items-center gap-2">
                     <HoverableIconWrapper highlightOn={false}>
-                        <IoCartOutline className="cursor-pointer" size={22} />
+                        <IoCartOutline className="cursor-pointer" size={22} />                        
+                        <CartNumberedCircle number={200}/>
                     </HoverableIconWrapper>
-                    <HoverableIconWrapper highlightOn={userDialogueActive}>
-                        <FaRegUser size={18} onClick={handeUserIconClicked} />
+                    <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
+                        <FaRegUser size={18}/>
                     </HoverableIconWrapper>
                 </div>
             </nav>
