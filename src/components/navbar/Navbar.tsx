@@ -1,17 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState, type ReactNode } from "react";
 import { IconContext } from "react-icons";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
-import { NavLink } from "react-router";
 import LoginRegister from "../../auth/components/LoginRegister";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
     const handeUserIconClicked = () => setUserDialogueActive(!userDialogueActive);
 
-    useEffect(() => {
-        console.log(userDialogueActive);
-    }, [userDialogueActive])
+    // Wrapper component that highlights child icon when clicked. HighlightOn: boolean to listen to, highlights when true. Pass false if icon should never highlight
+    const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean }> = ({ children, highlightOn }) => {
+        return(
+            <div className={`cursor-pointer hover:bg-gray-600 w-8 h-8 flex items-center justify-center rounded-full ${highlightOn && "bg-gray-600"}`}>
+                {children}
+            </div>
+        )
+    }
 
     return (
         <IconContext.Provider value={{ color: "white" }}>
@@ -28,10 +32,12 @@ const Navbar: React.FC = () => {
                     </ul>
                 </div>
                 <div className="flex flex-row items-center gap-3">
-                    <IoCartOutline className="cursor-pointer" size={22} />
-                    <div className={`cursor-pointer w-8 h-8 rounded-lg flex items-center justify-center rounded-[50%] ${userDialogueActive && "bg-gray-500"}`}>
+                    <HoverableIconWrapper highlightOn={false}>
+                        <IoCartOutline className="cursor-pointer" size={22} />
+                    </HoverableIconWrapper>
+                    <HoverableIconWrapper highlightOn={userDialogueActive}>
                         <FaRegUser size={18} onClick={handeUserIconClicked} />
-                    </div >
+                    </HoverableIconWrapper>
                 </div>
             </nav>
             {userDialogueActive && 

@@ -2,7 +2,7 @@ import type { Product } from "../../types/Types";
 
 const ProductCard: React.FC<Product> = ({ title, price, category, image, rating }) => {
     return (
-        <div className="grid grid-rows-2 aspect-[2/3] gap-3 items-center bg-white rounded-lg outline outline-gray-200 shadow-lg text-xs text-left p-3">
+        <div className="grid grid-rows-2 aspect-[2/3] gap-3 items-center bg-white rounded-lg outline outline-gray-300 hover:outline-yellow-500 shadow-lg text-xs text-left p-3">
             <div className="h-full flex justify-center">
                 <img className="h-full object-contain object-center" src={image}></img>
             </div>

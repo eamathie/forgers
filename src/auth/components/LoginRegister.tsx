@@ -3,6 +3,7 @@ import { URIUsersAll } from "../../utils/fake_store_api/Users";
 import { useFetch } from "../../utils/useFetch";
 import type { AuthInput, User } from "../types";
 import TextField from "./TextField";
+import LoginRegButton from "./LoginRegButton";
 
 
 const LoginRegister: React.FC = () => {
@@ -13,10 +14,17 @@ const LoginRegister: React.FC = () => {
         const { name, value } = e.target;
         setUserInput(prev => ({
             ...prev,
-            [name]: value,
+            [name.toLowerCase()]: value,
         }))
-    };
-    
+    };    
+
+    const handleRegister = () => {
+        console.log("register");
+    }
+
+    const handleLogin = () => {
+        console.log("login");
+    }
 
     useEffect(() => {
         console.log(users);
@@ -27,9 +35,13 @@ const LoginRegister: React.FC = () => {
     }, [userInput]);
 
     return (
-        <div className="bg-white z-0 rounded-lg outline outline-gray-200 shadow-lg text-xs text-left p-3">
+        <div className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
             <TextField name="Username" type="text" onChange={handleTextFieldChanged}/>
             <TextField name="Password" type="password" onChange={handleTextFieldChanged}/>
+            <div className="flex flex-row gap-2">
+                <LoginRegButton name="Register" onClick={handleRegister}/>
+                <LoginRegButton name="Login" onClick={handleLogin}/>
+            </div>
         </div>
     )
 }
