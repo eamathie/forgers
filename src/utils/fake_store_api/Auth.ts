@@ -1,0 +1,1 @@
+export const URILogin = 'https://fakestoreapi.com/auth/login';

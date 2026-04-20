@@ -6,7 +6,7 @@ import LoginRegister from "../../auth/components/LoginRegister";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
-    const handeUserIconClicked = () => setUserDialogueActive(!userDialogueActive);
+    const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
 
     // Wrapper component that highlights child icon when clicked. HighlightOn: boolean to listen to, highlights when true. Pass false if icon should never highlight
     const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean }> = ({ children, highlightOn }) => {
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
             </nav>
             {userDialogueActive && 
             <div className="absolute right-14">
-                <LoginRegister  />
+                <LoginRegister onClickOutside={() => setUserDialogueActive(false)}/>
             </div> }
         </IconContext.Provider>
     )

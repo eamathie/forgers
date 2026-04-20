@@ -1,30 +1,58 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { URIUsersAll } from "../../utils/fake_store_api/Users";
 import { useFetch } from "../../utils/useFetch";
-import type { AuthInput, User } from "../types";
+import type { LoginResponse, AuthRequest, User } from "../types";
 import TextField from "./TextField";
 import LoginRegButton from "./LoginRegButton";
+import { post } from "../../utils/post";
+import { URILogin } from "../../utils/fake_store_api/Auth";
 
 
-const LoginRegister: React.FC = () => {
+interface LoginRegisterProp {
+    onClickOutside: () => void;
+}
+
+const LoginRegister: React.FC<LoginRegisterProp> = ({ onClickOutside }) => {
     const {data: users, loading, error } = useFetch<User[]>(URIUsersAll);
-    const [userInput, setUserInput] = useState<AuthInput>({username: "", password: ""})
+    const [userInput, setUserInput] = useState<AuthRequest>({username: "", password: ""})
+    const [authError, setAuthError] = useState(false);
+    const ref = useRef<HTMLDivElement | null>(null);
 
     const handleTextFieldChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setUserInput(prev => ({
             ...prev,
             [name.toLowerCase()]: value,
-        }))
+        }));
     };    
 
     const handleRegister = () => {
         console.log("register");
     }
 
-    const handleLogin = () => {
-        console.log("login");
-    }
+    const handleLogin = async () => {
+        try {
+            console.log(userInput);
+            const result = await post<LoginResponse, AuthRequest>(URILogin, userInput);
+            console.log(result.token);
+            setAuthError(false);
+        } catch (error) {
+            console.error("Login failed", error);
+            setAuthError(true);
+        }        
+    };
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (ref.current && !ref.current.contains(event.target as Node)) {
+                onClickOutside();
+            };
+        };
+        document.addEventListener('mousedown', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside, true);
+        };
+    }, [onClickOutside]);
 
     useEffect(() => {
         console.log(users);
@@ -35,9 +63,10 @@ const LoginRegister: React.FC = () => {
     }, [userInput]);
 
     return (
-        <div className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
+        <div ref={ref} className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
             <TextField name="Username" type="text" onChange={handleTextFieldChanged}/>
             <TextField name="Password" type="password" onChange={handleTextFieldChanged}/>
+            {authError && <h2 className="text-red-500 font-bold">Error. Check your credentials</h2>}
             <div className="flex flex-row gap-2">
                 <LoginRegButton name="Register" onClick={handleRegister}/>
                 <LoginRegButton name="Login" onClick={handleLogin}/>

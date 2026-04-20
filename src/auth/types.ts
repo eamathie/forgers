@@ -9,9 +9,13 @@ export type UserContextType = {
   updateUser: (user: User | null) => void;
 };
 
-export type AuthInput = {
+export type AuthRequest = {
     username: string;
     password: string;
+}
+
+export type LoginResponse = {
+    token: string;
 }
 
 
