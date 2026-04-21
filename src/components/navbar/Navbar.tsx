@@ -7,12 +7,13 @@ import { useAuth } from "../../auth/useAuth";
 import { useFetch } from "../../utils/useFetch";
 import { URICartsAll } from "../../utils/fake_store_api/Carts";
 import type { Cart } from "../../types/Types";
+import ProductCardList from "../../cart/ProductCardList";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
     const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
     const {user, updateUser} = useAuth();
-    const {data: carts, loading, error} = useFetch<Cart[]>(URICartsAll);
+    const {data: carts, loading, error} = useFetch<Cart>(URICartsAll);
 
     const userCart = user ? carts?.find(c => c.userId === user.id) : null;
 
@@ -98,6 +99,9 @@ const Navbar: React.FC = () => {
             <div className="absolute right-14">
                 <LoginRegister onClickOutside={() => setUserDialogueActive(false)}/>
             </div> }
+            <div className="absolute right-40">
+                <ProductCardList cart={userCart ?? null} />
+            </div>
         </IconContext.Provider>
     )
 };

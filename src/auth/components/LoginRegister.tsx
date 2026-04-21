@@ -13,7 +13,7 @@ interface LoginRegisterProp {
 }
 
 const LoginRegister: React.FC<LoginRegisterProp> = ({ onClickOutside }) => {
-    const {data: users, loading, error } = useFetch<User[]>(URIUsersAll);
+    const {data: users, loading, error } = useFetch<User>(URIUsersAll);
     const [userInput, setUserInput] = useState<AuthRequest>({username: "", password: ""})
     const [authError, setAuthError] = useState(false);
     const { user, updateUser } = useAuth();

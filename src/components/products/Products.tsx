@@ -1,6 +1,6 @@
 import { useFetch } from "../../utils/useFetch"
-import { URIProductsAll } from "../../utils/fake_store_api/Products";
-import { useState } from "react";
+import { URIProducts } from "../../utils/fake_store_api/Products";
+import { useEffect, useState } from "react";
 import { type Product, type DropdownSetup } from "../../types/Types";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
@@ -9,7 +9,7 @@ import RadioButtonListCard from "./sorting/RadioButtonListCard";
 import Dropdown from "./sorting/Dropdown";
 
 const Products: React.FC = () => {
-    const {data: products, loading, error } = useFetch<Product[]>(URIProductsAll);
+    const {data: products, loading, error } = useFetch<Product>(URIProducts);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedSortOption, setSelectedSortOption] = useState<string | undefined>(undefined) 
@@ -24,6 +24,10 @@ const Products: React.FC = () => {
                 return [...prev, value]
         })
     }
+
+    useEffect(() => {
+        console.log(products);
+    }, [products])
 
     const handleDropdownSelected = (criterion: string) => { setSelectedDropdownItem(criterion) };
     const handleSortingOptionSelected = (option: string) => { setSelectedSortOption(option) };
