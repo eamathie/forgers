@@ -11,12 +11,15 @@ import ProductCardList from "../../cart/ProductCardList";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
-    const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
+    const [shoppingCartActive, setShoppingCartActive] = useState(false);
     const {user, updateUser} = useAuth();
     const {data: carts, loading, error} = useFetch<Cart>(URICartsAll);
-
+    
     const userCart = user ? carts?.find(c => c.userId === user.id) : null;
-
+    
+    const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
+    const handleShoppingCartClicked = () => setShoppingCartActive(prev => !prev);
+    
     // Wrapper component that highlights child icon when clicked. HighlightOn: boolean to listen to, highlights when true. Pass false if icon should never highlight
     const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean, onClick?: () => void }> = ({ children, highlightOn, onClick }) => {
         return(
@@ -27,7 +30,7 @@ const Navbar: React.FC = () => {
             </div>
         )
     }
-
+    
     // The tiny numbered dot that appears on top of the shopping cart symbol when it holds items
     const CartNumberedCircle: React.FC<{number: number}> = ({ number }) => {
         if (number === 0) return null;
@@ -43,12 +46,12 @@ const Navbar: React.FC = () => {
                 ${number >= 10 && number < 100 ? "text-[8px]" : "text-[10px]"}
                 flex items-center justify-center
                 pointer-events-none
-            `}>
+                `}>
                 {number < 100 ? number : "∞"}
             </span>
         )
     }
-
+    
     // The user's first name that appears besides the user icon when logged in
     const UserIconName: React.FC<{name: string | null}> = ({ name }) => {
         if (!name) return null;
@@ -64,12 +67,12 @@ const Navbar: React.FC = () => {
                 font-bold
                 flex items-center justify-center
                 pointer-events-none
-            `}>
+                `}>
                 {name.charAt(0).toUpperCase() + name.slice(1)}
             </span>
         )
     }
-
+    
     return (
         <IconContext.Provider value={{ color: "white" }}>
             <nav className="h-[50px] px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
@@ -85,7 +88,7 @@ const Navbar: React.FC = () => {
                     </ul>
                 </div>
                 <div className="flex flex-row items-center gap-2">
-                    <HoverableIconWrapper highlightOn={false}>
+                    <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>
                         <IoCartOutline className="cursor-pointer" size={22} />                        
                         <CartNumberedCircle number={userCart ? userCart.products.length : 0}/>
                     </HoverableIconWrapper>
@@ -97,11 +100,12 @@ const Navbar: React.FC = () => {
             </nav>
             {userDialogueActive && 
             <div className="absolute right-14">
-                <LoginRegister onClickOutside={() => setUserDialogueActive(false)}/>
+                <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
             </div> }
+            {shoppingCartActive && 
             <div className="absolute right-40">
-                <ProductCardList cart={userCart ?? null} />
-            </div>
+                <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
+            </div>}
         </IconContext.Provider>
     )
 };

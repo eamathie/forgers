@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { URIUsersAll } from "../../utils/fake_store_api/Users";
 import { useFetch } from "../../utils/useFetch";
 import type { LoginResponse, AuthRequest, User } from "../types";
@@ -7,6 +7,7 @@ import LoginRegButton from "./LoginRegButton";
 import { post } from "../../utils/post";
 import { URILogin } from "../../utils/fake_store_api/Auth";
 import { useAuth } from "../useAuth";
+import { useOnClickOutside } from "../../utils/interaction/useOnClickOutside";
 
 interface LoginRegisterProp {
     onClickOutside: () => void;
@@ -17,6 +18,8 @@ const LoginRegister: React.FC<LoginRegisterProp> = ({ onClickOutside }) => {
     const [userInput, setUserInput] = useState<AuthRequest>({username: "", password: ""})
     const [authError, setAuthError] = useState(false);
     const { user, updateUser } = useAuth();
+
+
     const ref = useRef<HTMLDivElement | null>(null);
 
     const handleTextFieldChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,17 +49,10 @@ const LoginRegister: React.FC<LoginRegisterProp> = ({ onClickOutside }) => {
 
     const handleLogout = () => updateUser(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                onClickOutside();
-            };
-        };
-        document.addEventListener('mousedown', handleClickOutside, true);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside, true);
-        };
-    }, [onClickOutside]);
+    // close when user clicks outside
+    useOnClickOutside(ref, () => {
+        onClickOutside();
+    })
     
     return (
         <div ref={ref} className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
