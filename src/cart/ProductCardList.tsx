@@ -3,6 +3,7 @@ import type { Cart, Product } from "../types/Types";
 import { URIProducts } from "../utils/fake_store_api/Products";
 import { useFetch } from "../utils/useFetch";
 import { useOnClickOutside } from "../utils/interaction/useOnClickOutside";
+import ProductCardHorisontal from "./ProductCardHorisontal";
 
 interface ProductCardListProps {
     cart: Cart | null;
@@ -22,10 +23,25 @@ const ProductCardList: React.FC<ProductCardListProps> = ({ cart, onClickOutside 
     })
 
     return(
-        <div ref={ref} className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
-            {products.map(p => 
-                <h2 key={`product-${p.id}`}>{p.title}</h2>
-            )}
+        <div ref={ref} className="flex flex-col gap-2 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-sm text-left p-3">
+            <h2 className="">Items in cart: {products.length}</h2>
+            <hr className="h-0.5 bg-gray-200"/>
+            {products.length === 0 
+            ?
+            <h2 className="italic">No items</h2> 
+            :
+            products.map(p => {
+                const quantity = cart?.products.find(pr => pr.productId === p.id)?.quantity ?? 0;
+                return (
+                    <ProductCardHorisontal
+                    key={`product-${p.id}`}
+                    product={p}
+                    quantity={quantity}
+                    />
+                );
+            })}
+            <hr className="h-0.5 bg-gray-200"/>
+            <h2>Total: {products.reduce((sum, product) => sum + product.price, 0) * 10} kr</h2>
         </div>
     )
 }

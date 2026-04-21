@@ -14,5 +14,5 @@ export const useOnClickOutside = (ref: React.RefObject<HTMLElement | null>, hand
         return () => {
             document.removeEventListener("mousedown", listener, true);
         };
-    }, [ref, handler]);
+    }, [handler]);
 } 

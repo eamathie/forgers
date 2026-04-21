@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
                 <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
             </div> }
             {shoppingCartActive && 
-            <div className="absolute right-40">
+            <div className="absolute right-28 w-[20%]">
                 <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
             </div>}
         </IconContext.Provider>
