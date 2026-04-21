@@ -14,6 +14,19 @@ export type Rating = {
     count: number;
 }
 
+// Cart
+export type Cart = {
+    id: number;
+    userId: number;
+    date: string;
+    products: [
+        {
+            productId: number; 
+            quantity: number
+        }
+    ]
+}
+
 // Radio button list
 export type RadioButtonList = {
     title: string,

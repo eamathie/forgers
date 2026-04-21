@@ -1,8 +1,11 @@
 export type User = {
-  id: string;
+  id: number;
   username:string;
   email: string;
-  name: string;
+  name: {
+    firstname: string;
+    lastname: string;
+  };
 };
 
 export type UserContextType = {
@@ -18,47 +21,3 @@ export type AuthRequest = {
 export type LoginResponse = {
     token: string;
 }
-
-
-/* 
-interface IAddress {
-    geoLocation: IGeoLocation;
-    city: string;
-    street: string;
-    number: number;
-    zipcode: string;
-}
-
-interface IGeoLocation {
-    lat: number;
-    long: number;
-}
-
-interface IName {
-    firstName: string;
-    lastName: string;
-}
-
-
-{ 
-    "address": { 
-        "geolocation": { 
-            "lat": "-37.3159", 
-            "long": "81.1496" 
-        }, 
-        "city": "kilcoole", 
-        "street": "new road", 
-        "number": 7682, 
-        "zipcode": "12926-3874" 
-    }, 
-    "id": 1, 
-    "email": "john@gmail.com", 
-    "username": "johnd", 
-    "password": "m38rmF$", 
-    "name": { 
-        "firstname": "john", 
-        "lastname": "doe" 
-    }, 
-    "phone": "1-570-236-7033", 
-    "__v": 0 
-} */

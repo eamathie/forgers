@@ -3,10 +3,18 @@ import { IconContext } from "react-icons";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
 import LoginRegister from "../../auth/components/LoginRegister";
+import { useAuth } from "../../auth/useAuth";
+import { useFetch } from "../../utils/useFetch";
+import { URICartsAll } from "../../utils/fake_store_api/Carts";
+import type { Cart } from "../../types/Types";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
     const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
+    const {user, updateUser} = useAuth();
+    const {data: carts, loading, error} = useFetch<Cart[]>(URICartsAll);
+
+    const userCart = user ? carts?.find(c => c.userId === user.id) : null;
 
     // Wrapper component that highlights child icon when clicked. HighlightOn: boolean to listen to, highlights when true. Pass false if icon should never highlight
     const HoverableIconWrapper: React.FC<{ children: ReactNode, highlightOn: boolean, onClick?: () => void }> = ({ children, highlightOn, onClick }) => {
@@ -21,6 +29,7 @@ const Navbar: React.FC = () => {
 
     // The tiny numbered dot that appears on top of the shopping cart symbol when it holds items
     const CartNumberedCircle: React.FC<{number: number}> = ({ number }) => {
+        if (number === 0) return null;
         return (
             <span className={`
                 absolute
@@ -39,14 +48,35 @@ const Navbar: React.FC = () => {
         )
     }
 
+    // The user's first name that appears besides the user icon when logged in
+    const UserIconName: React.FC<{name: string | null}> = ({ name }) => {
+        if (!name) return null;
+        return (
+            <span className={`
+                absolute
+                -right-4
+                top-3
+                w-3 h-3
+                text-white
+                text-[12px]
+                underline
+                font-bold
+                flex items-center justify-center
+                pointer-events-none
+            `}>
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+            </span>
+        )
+    }
+
     return (
         <IconContext.Provider value={{ color: "white" }}>
-            <nav className="h-[50px] px-20 flex flex-row justify-between items-center bg-gray-800">
+            <nav className="h-[50px] px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                 <div className="text-yellow-300 text-2xl font-bold italic">
                     <a href="/">Forgers™</a>
                 </div>
                 <div className="flex flex-row gap-10 items-center">
-                    <ul className="flex flex-cols gap-8 text-gray-200">
+                    <ul className="flex flex-cols gap-8">
                         <li className="hover:underline"><a href="*">Store</a></li>
                         <li className="hover:underline"><a href="*">Exclusive deals</a></li>
                         <li className="hover:underline"><a href="*">About</a></li>
@@ -56,10 +86,11 @@ const Navbar: React.FC = () => {
                 <div className="flex flex-row items-center gap-2">
                     <HoverableIconWrapper highlightOn={false}>
                         <IoCartOutline className="cursor-pointer" size={22} />                        
-                        <CartNumberedCircle number={200}/>
+                        <CartNumberedCircle number={userCart ? userCart.products.length : 0}/>
                     </HoverableIconWrapper>
                     <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
                         <FaRegUser size={18}/>
+                        <UserIconName name={user && user.name.firstname}/>
                     </HoverableIconWrapper>
                 </div>
             </nav>

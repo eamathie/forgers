@@ -6,7 +6,7 @@ interface UseFetchState<T> {
     error: Error | null;
 }
 
-export const useFetch = <T>(url: string): UseFetchState<T> => {
+export const useFetch = <T>(url: string | null): UseFetchState<T> => {
     const [state, setState] = useState<UseFetchState<T>>({
         data: null,
         loading: true,
@@ -14,8 +14,17 @@ export const useFetch = <T>(url: string): UseFetchState<T> => {
     });
 
     useEffect(() => {
+        // makes it possible to run useFetch based on external factors by passing url = null, like when a user logs in and out, in that case to fetch their carts or return null if not signed in
+        if (!url) {
+            setState({
+                data: null,
+                loading: false,
+                error: null
+            })
+            return;
+        }     
+        
         let isMounted = true;
-
         const fetchData = async () => {
             try {
                 const response = await fetch(url);
