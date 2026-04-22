@@ -8,6 +8,7 @@ import { useFetch } from "../../utils/useFetch";
 import { URICartsAll } from "../../utils/fake_store_api/Carts";
 import type { Cart } from "../../types/Types";
 import ProductCardList from "../../cart/ProductCardList";
+import { Link, NavLink } from "react-router";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
@@ -76,16 +77,12 @@ const Navbar: React.FC = () => {
     return (
         <IconContext.Provider value={{ color: "white" }}>
             <nav className="h-[50px] px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
-                <div className="text-yellow-300 text-2xl font-bold italic">
-                    <a href="/">Forgers™</a>
-                </div>
-                <div className="flex flex-row gap-10 items-center">
-                    <ul className="flex flex-cols gap-8">
-                        <li className="hover:underline"><a href="*">Store</a></li>
-                        <li className="hover:underline"><a href="*">Exclusive deals</a></li>
-                        <li className="hover:underline"><a href="*">About</a></li>
-                        <li className="hover:underline"><a href="*">Contact</a></li>
-                    </ul>
+                <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
+                <div className="flex flex-cols gap-8 items-center">
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Exclusive deals</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>About</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Contact</NavLink>
                 </div>
                 <div className="flex flex-row items-center gap-2">
                     <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>
