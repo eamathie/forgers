@@ -18,7 +18,7 @@ const Dropdown: React.FC<DropdownProps> = ({ criterion, onSelect, children }) =>
     }
 
     return (
-        <div className="flex flex-col min-w-[275px]">
+        <div className="flex flex-col md:min-w-[275px]">
             <label>Sort: </label>
             <hr className="h-0.5 bg-gray-200"/>
             <div className="flex flex-col-2 gap-3 justify-items-start items-start">

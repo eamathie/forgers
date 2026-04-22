@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { IconContext } from "react-icons";
 import { FaRegUser } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCartOutline } from "react-icons/io5";
 import LoginRegister from "../../auth/components/LoginRegister";
 import { useAuth } from "../../auth/useAuth";
@@ -73,36 +74,80 @@ const Navbar: React.FC = () => {
             </span>
         )
     }
+
+    const MobileNavbar: React.FC = () => {
+        return (
+            <>
+                <div className="h-[60px] w-full px-8 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+                    <div className="flex flex-row items-center gap-5">
+                        {/* <RxHamburgerMenu size={25} /> */}
+                        <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
+                    </div>
+                    <div className="flex flex-row items-center gap-4">
+                        <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>
+                            <IoCartOutline className="cursor-pointer" size={28} />                        
+                            <CartNumberedCircle number={userCart ? userCart.products.length : 0}/>
+                        </HoverableIconWrapper>
+                        <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
+                            <FaRegUser size={23}/>
+                            <UserIconName name={user && user.name.firstname}/>
+                        </HoverableIconWrapper>
+                    </div>
+                </div>
+                {userDialogueActive && 
+                <div className="absolute right-14">
+                    <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
+                </div> }
+                {shoppingCartActive && 
+                <div className="absolute right-28 w-[20%]">
+                    <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
+                </div>}
+            </>
+        )
+    }
+
+    const DesktopNavbar: React.FC = () => {
+        return (
+            <>
+                <nav className="h-[50px] w-full px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+                    <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
+                    <div className="flex flex-cols gap-8 items-center">
+                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>
+                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Exclusive deals</NavLink>
+                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>About</NavLink>
+                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Contact</NavLink>
+                    </div>
+                    <div className="flex flex-row items-center gap-2">
+                        <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>
+                            <IoCartOutline className="cursor-pointer" size={22} />                        
+                            <CartNumberedCircle number={userCart ? userCart.products.length : 0}/>
+                        </HoverableIconWrapper>
+                        <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
+                            <FaRegUser size={18}/>
+                            <UserIconName name={user && user.name.firstname}/>
+                        </HoverableIconWrapper>
+                    </div>
+                </nav>
+                {userDialogueActive && 
+                <div className="absolute right-14">
+                    <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
+                </div> }
+                {shoppingCartActive && 
+                <div className="absolute right-28 w-[20%]">
+                    <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
+                </div>}
+            </>
+        )
+    }
     
     return (
         <IconContext.Provider value={{ color: "white" }}>
-            <nav className="h-[50px] w-full px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
-                <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
-                <div className="flex flex-cols gap-8 items-center">
-                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>
-                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Exclusive deals</NavLink>
-                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>About</NavLink>
-                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Contact</NavLink>
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                    <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>
-                        <IoCartOutline className="cursor-pointer" size={22} />                        
-                        <CartNumberedCircle number={userCart ? userCart.products.length : 0}/>
-                    </HoverableIconWrapper>
-                    <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
-                        <FaRegUser size={18}/>
-                        <UserIconName name={user && user.name.firstname}/>
-                    </HoverableIconWrapper>
-                </div>
-            </nav>
-            {userDialogueActive && 
-            <div className="absolute right-14">
-                <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
-            </div> }
-            {shoppingCartActive && 
-            <div className="absolute right-28 w-[20%]">
-                <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
-            </div>}
+            <div className="md:hidden block">
+                <MobileNavbar />
+            </div>
+            <div className="hidden md:block">
+                <DesktopNavbar />
+            </div>
         </IconContext.Provider>
     )
 };

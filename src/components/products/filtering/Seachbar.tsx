@@ -4,7 +4,7 @@ interface SearchBarProps {
 
 const Searchbar: React.FC<SearchBarProps> = ({ onChange }) => {
     return (
-        <div className="h-1/2 flex flex-col">
+        <div className="h-16 md:h-1/2 flex flex-col">
             <label htmlFor="searchBar">Search: </label>
             <hr className="h-0.5 bg-gray-200"/>
             <input 

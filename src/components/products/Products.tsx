@@ -63,14 +63,16 @@ const Products: React.FC = () => {
     });
 
     return (
-        <div className="flex flex-col mx-[8vw] px-5 gap-10 my-3">
+        <div className="flex flex-col px-10 gap-10 my-3">
             <div className="flex flex-row gap-5">
                 <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
-                <Searchbar onChange={setSearchQuery} />
-                <Dropdown criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
-                    {selectedDropdownItem && dropDowns.find(d => d.title === selectedDropdownItem)?.options && 
-                    <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownItem)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
-                </Dropdown>
+                <div className="flex flex-col md:flex-row md:gap-3 w-1/2 ">
+                    <Searchbar onChange={setSearchQuery} />
+                    <Dropdown criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
+                        {selectedDropdownItem && dropDowns.find(d => d.title === selectedDropdownItem)?.options && 
+                        <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownItem)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
+                    </Dropdown>
+                </div>
             </div>
             <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-8">
                 {productsVisible
