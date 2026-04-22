@@ -12,10 +12,10 @@ import ProductCardList from "../../cart/ProductCardList";
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
     const [shoppingCartActive, setShoppingCartActive] = useState(false);
-    const {user, updateUser} = useAuth();
-    const {data: carts, loading, error} = useFetch<Cart>(URICartsAll);
+    const { user } = useAuth();
+    const { data: carts, loading, error } = useFetch<Cart>(URICartsAll);
     
-    const userCart = user ? carts?.find(c => c.userId === user.id) : null;
+    const userCart: Cart | null = carts?.find(c => c.userId === user?.id) ?? null;
     
     const handeUserIconClicked = () => setUserDialogueActive(prev => !prev);
     const handleShoppingCartClicked = () => setShoppingCartActive(prev => !prev);
