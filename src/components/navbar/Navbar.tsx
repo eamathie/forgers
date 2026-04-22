@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
     
     return (
         <IconContext.Provider value={{ color: "white" }}>
-            <nav className="h-[50px] px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+            <nav className="h-[50px] w-screen px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                 <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
                 <div className="flex flex-cols gap-8 items-center">
                     <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>

@@ -72,7 +72,7 @@ const Products: React.FC = () => {
                     <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownItem)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
                 </Dropdown>
             </div>
-            <div className="grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(130px,1fr))] gap-8">
                 {productsVisible
                 .map(product => (
                     <ProductCard 
