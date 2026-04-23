@@ -8,6 +8,8 @@ import CategorySelector from "./filtering/CategorySelector";
 import RadioButtonListCard from "./sorting/RadioButtonListCard";
 import Dropdown from "./sorting/Dropdown";
 import { sortComparators } from "./sorting/utils";
+import MobileSidebar from "../navbar/MobileSidebar";
+import { NavLink } from "react-router";
 
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product>(URIProducts);
@@ -93,31 +95,38 @@ const Products: React.FC = () => {
     };
 
     return (
-        <div className="flex flex-col px-10 md:px-32 md:gap-10 my-3 h-screen">
-            <div className="md:hidden block">
-                <MobileSearchFilter />
-            </div>
-            <div className="hidden md:block">
-                <DesktopSearchFilter />
-            </div>
-            <div className="overflow-y-auto p-1">
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-8">
-                    {productsVisible
-                    .map(product => (
-                        <ProductCard 
-                        key={product.id} 
-                        id={product.id}
-                        title={product.title}
-                        price={product.price}
-                        description={product.description}
-                        category={product.category}
-                        image={product.image}
-                        rating={product.rating}
-                        />
-                    ))}
+        <>
+            <MobileSidebar /* nameChildrenNodesPairs={[{name: "Test", children: <>
+                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
+                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
+                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
+                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink></>}]} *//>
+            <div className="flex flex-col px-10 md:px-32 md:gap-10 my-3 h-screen">
+                <div className="md:hidden block">
+                    <MobileSearchFilter />
+                </div>
+                <div className="hidden md:block">
+                    <DesktopSearchFilter />
+                </div>
+                <div className="overflow-y-auto p-1">
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-8">
+                        {productsVisible
+                        .map(product => (
+                            <ProductCard 
+                            key={product.id} 
+                            id={product.id}
+                            title={product.title}
+                            price={product.price}
+                            description={product.description}
+                            category={product.category}
+                            image={product.image}
+                            rating={product.rating}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

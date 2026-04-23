@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { IconContext } from "react-icons";
 import { FaRegUser } from "react-icons/fa";
 import { IoCartOutline } from "react-icons/io5";
@@ -9,12 +9,10 @@ import { URICartsAll } from "../../utils/fake_store_api/Carts";
 import type { Cart } from "../../types/Types";
 import ProductCardList from "../../cart/ProductCardList";
 import { Link, NavLink } from "react-router";
-import { GoChevronDown } from "react-icons/go";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
     const [shoppingCartActive, setShoppingCartActive] = useState(false);
-    const [mobileSidebarActive, setMobileSidebarActive] = useState(false);
     const { user } = useAuth();
     const { data: carts, loading, error } = useFetch<Cart>(URICartsAll);
     
@@ -76,60 +74,6 @@ const Navbar: React.FC = () => {
         )
     }
 
-    // The circular backround behind the sidebar's GoChevronDown-icon
-    const ChevronCircle: React.FC<{ children: ReactNode }> = ({ children }) => {
-        return (
-            <span className={`
-                absolute 
-                -right-[35%] 
-                top-[50%]
-                w-14 h-14
-                rounded-full
-                bg-gray-800
-                text-white
-                flex items-center justify-center
-                `}
-                onClick={() => setMobileSidebarActive(prev => !prev)}
-                >
-                {children}
-            </span>
-        )
-    }
-
-    const MobileSidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
-        const [mounted, setMounted] = useState(false);
-
-        // this little work-around makes the sidebar ease-in-out work
-        useEffect(() => {
-            setMounted(true);
-        }, [])
-        
-        return (
-                <div className={`duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'} absolute h-full w-[45%] p-6 z-50 flex flex-col gap-2 text-lg text-gray-200 bg-gray-800`}>
-                    <div>
-                        <h2>Explore</h2>
-                        <hr className="bg-gray-200"/>
-                    </div>
-                    <div className="flex flex-col gap-1 items-stretch">
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink>
-                    </div>
-                    <ChevronCircle>
-                        <GoChevronDown
-                        size={40}
-                        rotate={90}
-                        className={`
-                            duration-150 ease-in-out ${
-                            isOpen ? "rotate-90" : "-rotate-90"
-                        }`}
-                        />
-                    </ChevronCircle>
-                </div>      
-        )
-    }
-
     const MobileNavbar: React.FC = () => {
         return (
             <>
@@ -149,7 +93,6 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
                 <hr className="h-0.5 bg-yellow-300"/>
-                <MobileSidebar isOpen={mobileSidebarActive}/>
                 {userDialogueActive && 
                 <div className="absolute right-14">
                     <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
