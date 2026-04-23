@@ -5,6 +5,7 @@ interface RadioButtonListCardProps {
 }
 
 const RadioButtonListCard: React.FC<RadioButtonListCardProps> = ({ options, selected, onSelect }) => {
+    if (options.length === 0) return null;
     return (
         <div className="border-2 rounded-lg px-2 my-1">
             {options.map((o) => 

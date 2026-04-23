@@ -78,9 +78,9 @@ const Navbar: React.FC = () => {
     const MobileNavbar: React.FC = () => {
         return (
             <>
-                <div className="h-[60px] w-full px-8 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+                <div className="h-[60px] w-full px-6 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                     <div className="flex flex-row items-center gap-5">
-                        {/* <RxHamburgerMenu size={25} /> */}
+                        <RxHamburgerMenu size={25} />
                         <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
                     </div>
                     <div className="flex flex-row items-center gap-4">
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
     const DesktopNavbar: React.FC = () => {
         return (
             <>
-                <nav className="h-[50px] w-full px-20 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+                <nav className="h-[50px] w-full px-10 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                     <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
                     <div className="flex flex-cols gap-8 items-center">
                         <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>
