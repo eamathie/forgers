@@ -13,7 +13,7 @@ const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product>(URIProducts);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [selectedSortOption, setSelectedSortOption] = useState<string | null>(null) 
+    const [selectedSortOption, setSelectedSortOption] = useState<string>("None") 
     const [selectedDropdownOption, setSelectedDropdownOption] = useState<string>("None");
 
     // implicitly update selectedCategories array when CategorySelector checkboxes are changed
@@ -28,7 +28,7 @@ const Products: React.FC = () => {
 
     // reset radio buttons (all unchecked) when selecting new sorting category from dropdown
     useEffect(() => {
-        setSelectedSortOption(null);
+        setSelectedSortOption("None");
     }, [selectedDropdownOption])
 
     const handleDropdownSelected = (criterion: string) => { setSelectedDropdownOption(criterion) };
@@ -52,7 +52,7 @@ const Products: React.FC = () => {
     .filter(product => selectedCategories.length === 0 || selectedCategories.some(c => c.toLowerCase() === product.category.toLowerCase()))
     .slice()
     .sort((a, b) => {
-        if (selectedDropdownOption === "None" || !selectedSortOption) return 0;
+        if (selectedDropdownOption === "None" || selectedSortOption === "None") return 0;
         const comparator = sortComparators[selectedDropdownOption];
         if (!comparator) return 0;
         const result = comparator(a, b);
@@ -65,7 +65,7 @@ const Products: React.FC = () => {
                 <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
                 <div className="flex flex-col md:flex-row md:gap-3 w-1/2 ">
                     <Searchbar onChange={setSearchQuery} />
-                    <Dropdown selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
+                    <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
                         {selectedDropdownOption && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
                         <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownOption)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
                     </Dropdown>
@@ -77,12 +77,14 @@ const Products: React.FC = () => {
     const MobileSearchFilter: React.FC = () => {
         return (
             <div className="flex flex-col gap-4">
-                <div className="flex flex-col w-1/2">
-                    {/* <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/> */}
+                <div className="flex flex-col w-fit">
                     <div className="flex flex-col md:flex-row md:gap-3 ">
                         <Searchbar onChange={setSearchQuery} />
-                        <Dropdown selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
-                        </Dropdown>
+                        <div className="flex flex-row  gap-2">
+                            <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} />
+                            {selectedDropdownOption !== "None" && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
+                            <Dropdown name="Option" selected={selectedSortOption} criterion={dropDowns.find(d => d.title === selectedDropdownOption)!.options} onSelect={handleSortingOptionSelected} />}
+                        </div>
                     </div>
                 </div>
                 <hr className="h-0.5 bg-gray-200 mx-1"/>

@@ -2,13 +2,14 @@ import { useState } from "react";
 import { GoChevronDown } from "react-icons/go";
 
 interface DropdownProps {
+    name: string;
     criterion: string[];
     selected: string;
     onSelect: (criterion: string) => void;
     children?: React.ReactNode;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ criterion, selected, onSelect, children }) => {
+const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect, children }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClicked = (criterion: string) => {
@@ -54,10 +55,10 @@ const Dropdown: React.FC<DropdownProps> = ({ criterion, selected, onSelect, chil
     }
 
     return (
-        <div className="flex flex-col md:min-w-[275px]">
-            <label>Sort: </label>
+        <div className="flex flex-col">
+            <label>{name}: </label>
             <hr className="h-0.5 bg-gray-200"/>
-            <div className="flex flex-col-2 gap-3 justify-items-start items-start">
+            <div className="flex flex-col gap-3 justify-items-start items-start">
                 <div id="sorting" className="border-2 rounded-lg my-1">
                     <div 
                     className="flex flex-row items-center px-2"
