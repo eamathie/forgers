@@ -8,9 +8,9 @@ const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
     const updateUser = (user: User | null) => setUser(user);
 
     return (
-        <AuthContext.Provider value={{ user, updateUser }}>
+        <AuthContext value={{ user, updateUser }}>
             { children }
-        </AuthContext.Provider>
+        </AuthContext>
     )
 }
 

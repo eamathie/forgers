@@ -93,14 +93,6 @@ const Navbar: React.FC = () => {
                     </div>
                 </div>
                 <hr className="h-0.5 bg-yellow-300"/>
-                {userDialogueActive && 
-                <div className="absolute right-14">
-                    <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
-                </div> }
-                {shoppingCartActive && 
-                <div className="absolute right-28 w-[20%]">
-                    <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
-                </div>}
             </>
         )
     }
@@ -126,15 +118,7 @@ const Navbar: React.FC = () => {
                             <UserIconName name={user && user.name.firstname}/>
                         </HoverableIconWrapper>
                     </div>
-                </nav>
-                {userDialogueActive && 
-                <div className="absolute right-14">
-                    <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
-                </div> }
-                {shoppingCartActive && 
-                <div className="absolute right-28 w-[20%]">
-                    <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
-                </div>}
+                </nav>    
             </>
         )
     }
@@ -147,6 +131,14 @@ const Navbar: React.FC = () => {
             <div className="hidden md:block">
                 <DesktopNavbar />
             </div>
+            {userDialogueActive && 
+                <div className="absolute right-14">
+                    <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
+                </div> }
+            {shoppingCartActive && 
+            <div className="absolute right-28 w-[20%]">
+                <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
+            </div>}
         </IconContext.Provider>
     )
 };

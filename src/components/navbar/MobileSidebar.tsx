@@ -41,43 +41,43 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
     }
     
     return (
-            <div className={`duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'} absolute h-full w-[45%] p-6 flex flex-col gap-8 text-lg text-gray-200 bg-gray-800 z-20`}>
-                <div className="flex flex-col gap-3">
-                    <div>
-                        <h2>Explore</h2>
-                        <hr className="bg-gray-200"/>
-                    </div>
-                    <div className="flex flex-col gap-1 items-stretch">
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink>
-                    </div>
-                </div>
+        <div className={`duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'} absolute h-full w-[45%] p-6 flex flex-col gap-8 text-lg text-gray-200 bg-gray-800 z-20`}>
+            <div className="flex flex-col gap-3">
                 <div>
-                    {nameChildrenNodesPairs?.map(e => 
-                        <div key={e.name} className="flex flex-col gap-3">
-                            <div>
-                                <h2>{e.name}</h2>
-                                <hr className="bg-gray-200"/>
-                            </div>
-                            <div className="flex flex-col gap-1 items-stretch">
-                                {e.children}
-                            </div>
-                        </div>
-                    )}
+                    <h2>Explore</h2>
+                    <hr className="bg-gray-200"/>
                 </div>
-                <ChevronCircle>
-                    <GoChevronDown
-                    size={40}
-                    rotate={90}
-                    className={`
-                        duration-150 ease-in-out ${
-                        isOpen ? "rotate-90" : "-rotate-90"
-                    }`}
-                    />
-                </ChevronCircle>
-            </div>      
+                <div className="flex flex-col gap-1 items-stretch">
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
+                    <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink>
+                </div>
+            </div>
+            <div>
+                {nameChildrenNodesPairs?.map(e => 
+                    <div key={e.name} className="flex flex-col gap-3">
+                        <div>
+                            <h2>{e.name}</h2>
+                            <hr className="bg-gray-200"/>
+                        </div>
+                        <div className="flex flex-col gap-1 items-stretch">
+                            {e.children}
+                        </div>
+                    </div>
+                )}
+            </div>
+            <ChevronCircle>
+                <GoChevronDown
+                size={40}
+                rotate={90}
+                className={`
+                    duration-150 ease-in-out ${
+                    isOpen ? "rotate-90" : "-rotate-90"
+                }`}
+                />
+            </ChevronCircle>
+        </div>      
     )
 }
 

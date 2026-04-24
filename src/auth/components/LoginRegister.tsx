@@ -55,7 +55,7 @@ const LoginRegister: React.FC<LoginRegisterProp> = ({ onClickOutside }) => {
     })
     
     return (
-        <div ref={ref} className="flex flex-col gap-1 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
+        <div ref={ref} className="flex flex-col gap-1 bg-white rounded-lg outline outline outline-yellow-500 shadow-lg text-xs text-left p-3">
             {!user ?
             <div>
                 <TextField name="Username" type="text" onChange={handleTextFieldChanged}/>

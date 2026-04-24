@@ -81,11 +81,6 @@ const Products: React.FC = () => {
                 <div className="flex flex-col w-fit">
                     <div className="flex flex-col md:flex-row md:gap-3 ">
                         <Searchbar onChange={setSearchQuery} />
-                        <div className="flex flex-row  gap-2">
-                            <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} />
-                            {selectedDropdownOption !== "None" && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
-                            <Dropdown name="Option" selected={selectedSortOption} criterion={dropDowns.find(d => d.title === selectedDropdownOption)!.options} onSelect={handleSortingOptionSelected} />}
-                        </div>
                     </div>
                 </div>
                 <hr className="h-0.5 bg-gray-200 mx-1"/>
@@ -93,9 +88,24 @@ const Products: React.FC = () => {
         );
     };
 
+    const MobileSort: React.FC = () => {
+        return (
+            <div className="flex flex-col  gap-2">
+                <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} />
+                {selectedDropdownOption !== "None" && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
+                <Dropdown name="Option" selected={selectedSortOption} criterion={dropDowns.find(d => d.title === selectedDropdownOption)!.options} onSelect={handleSortingOptionSelected} />}
+            </div>
+        );
+    };  
+
     return (
         <>
-            <MobileSidebar nameChildrenNodesPairs={[{name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>}]}/>
+            <span className="md:hidden">
+                <MobileSidebar nameChildrenNodesPairs={[
+                    {name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>},
+                    {name: "Sort", children: <MobileSort />}
+                ]}/>
+            </span>
             <div className="flex flex-col px-10 md:px-32 md:gap-10 my-3 h-screen">
                 <div className="md:hidden block">
                     <MobileSearchFilter />
