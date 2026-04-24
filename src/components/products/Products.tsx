@@ -4,12 +4,11 @@ import { useEffect, useState } from "react";
 import { type Product, type DropdownSetup } from "../../types/Types";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
-import CategorySelector from "./filtering/CategorySelector";
+import { CategorySelector, MobileCategorySelector } from "./filtering/CategorySelector";
 import RadioButtonListCard from "./sorting/RadioButtonListCard";
 import Dropdown from "./sorting/Dropdown";
 import { sortComparators } from "./sorting/utils";
 import MobileSidebar from "../navbar/MobileSidebar";
-import { NavLink } from "react-router";
 
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product>(URIProducts);
@@ -96,11 +95,7 @@ const Products: React.FC = () => {
 
     return (
         <>
-            <MobileSidebar /* nameChildrenNodesPairs={[{name: "Test", children: <>
-                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
-                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
-                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
-                <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink></>}]} *//>
+            <MobileSidebar nameChildrenNodesPairs={[{name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>}]}/>
             <div className="flex flex-col px-10 md:px-32 md:gap-10 my-3 h-screen">
                 <div className="md:hidden block">
                     <MobileSearchFilter />
