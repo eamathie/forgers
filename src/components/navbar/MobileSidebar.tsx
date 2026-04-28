@@ -54,7 +54,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
                     <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink>
                 </div>
             </div>
-            <div>
+            <div className="flex flex-col gap-8">
                 {nameChildrenNodesPairs?.map(e => 
                     <div key={e.name} className="flex flex-col gap-3">
                         <div>

@@ -23,7 +23,7 @@ const ProductCardList: React.FC<ProductCardListProps> = ({ cart, onClickOutside 
     })
 
     return(
-        <div ref={ref} className="flex flex-col gap-2 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-sm text-left p-3">
+        <div ref={ref} className="flex flex-col w-[200px] gap-2 bg-white z-0 rounded-lg outline outline outline-yellow-500 shadow-lg text-sm text-left p-3">
             {loading ? 
             <h2>Loading...</h2> :
             <div className="flex flex-col gap-2">

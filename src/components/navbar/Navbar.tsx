@@ -88,7 +88,7 @@ const Navbar: React.FC = () => {
                         </HoverableIconWrapper>
                         <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
                             <FaRegUser size={23}/>
-                            <UserIconName name={user && user.name.firstname}/>
+                            {/* <UserIconName name={user && user.name.firstname}/> */}
                         </HoverableIconWrapper>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ const Navbar: React.FC = () => {
                         </HoverableIconWrapper>
                         <HoverableIconWrapper highlightOn={userDialogueActive} onClick={handeUserIconClicked}>
                             <FaRegUser size={18}/>
-                            <UserIconName name={user && user.name.firstname}/>
+                            {/* <UserIconName name={user && user.name.firstname}/> */}
                         </HoverableIconWrapper>
                     </div>
                 </nav>    
@@ -132,11 +132,11 @@ const Navbar: React.FC = () => {
                 <DesktopNavbar />
             </div>
             {userDialogueActive && 
-                <div className="absolute right-14">
+                <div className="absolute right-1">
                     <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
                 </div> }
             {shoppingCartActive && 
-            <div className="absolute right-28 w-[20%]">
+            <div className="absolute right-1">
                 <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
             </div>}
         </IconContext.Provider>

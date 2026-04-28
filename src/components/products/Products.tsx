@@ -60,30 +60,16 @@ const Products: React.FC = () => {
         return selectedSortOption === "Low-high" ? result : -result;
     });
 
-    const DesktopSearchFilter: React.FC = () => {
+    const DesktopFilter: React.FC = () => {
         return (
             <div className="flex flex-row gap-5">
                 <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
                 <div className="flex flex-col md:flex-row md:gap-3 w-1/2 ">
-                    <Searchbar onChange={setSearchQuery} />
                     <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
                         {selectedDropdownOption && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
                         <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownOption)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
                     </Dropdown>
                 </div>
-            </div>
-        );
-    };
-
-    const MobileSearchFilter: React.FC = () => {
-        return (
-            <div className="flex flex-col gap-4">
-                <div className="flex flex-col w-fit">
-                    <div className="flex flex-col md:flex-row md:gap-3 ">
-                        <Searchbar onChange={setSearchQuery} />
-                    </div>
-                </div>
-                <hr className="h-0.5 bg-gray-200 mx-1"/>
             </div>
         );
     };
@@ -106,14 +92,14 @@ const Products: React.FC = () => {
                     {name: "Sort", children: <MobileSort />}
                 ]}/>
             </span>
-            <div className="flex flex-col px-10 md:px-32 md:gap-10 my-3 h-screen">
-                <div className="md:hidden block">
-                    <MobileSearchFilter />
+            <div className="flex flex-col gap-5 md:gap-10 my-3 h-screen">
+                <div className="px-10 md:px-32">    
+                    <Searchbar onChange={setSearchQuery}/>
                 </div>
                 <div className="hidden md:block">
-                    <DesktopSearchFilter />
+                    <DesktopFilter />
                 </div>
-                <div className="overflow-y-auto p-1">
+                <div className="overflow-y-auto px-10 md:px-32 p-1">
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-8">
                         {productsVisible
                         .map(product => (
