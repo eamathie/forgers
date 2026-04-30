@@ -26,7 +26,7 @@ const DesktopFilterSort: React.FC<DesktopFilterSortProps> = ({ updateSelectedCat
       </div>
 
       {isOpen && (
-        <div className="flex flex-row gap-10">
+        <div className="flex flex-row gap-10 p-2 m-1 rounded-lg outline outline-2 outline-gray-200">
           <div className="w-1/4">
             <h2>Categories:</h2>
             <hr className="h-0.5 bg-gray-200" />
