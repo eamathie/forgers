@@ -9,12 +9,7 @@ type DesktopFilterSortProps = {
   SortDropdowns: React.FC;
 };
 
-const DesktopFilterSort: React.FC<DesktopFilterSortProps> = ({
-  updateSelectedCategories,
-  selectedCategories,
-  categories,
-  SortDropdowns,
-}) => {
+const DesktopFilterSort: React.FC<DesktopFilterSortProps> = ({ updateSelectedCategories, selectedCategories, categories, SortDropdowns }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

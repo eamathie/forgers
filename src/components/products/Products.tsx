@@ -4,7 +4,7 @@ import { URIProducts } from "../../utils/fake_store_api/Products";
 import { type Product } from "../../types/Types";
 import { dropDowns } from "./sorting/data";
 import { CategorySelector } from "./filtering/CategorySelector";
-import { sortComparators } from "./sorting/utils";
+import { filterProducts, sortProducts } from "./sorting/utils";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
 import MobileSidebar from "../navbar/MobileSidebar";
@@ -40,19 +40,12 @@ const Products: React.FC = () => {
     if (loading) return <div>Loading products...</div>;
     if (error) return <div>Error: {error.message}</div>;
     
-    const categories: string[] = [... new Set(products?.map(p => p.category))]; // scan for categories in all products (yes, this means "men's clothing" and "Men's clothing" would be separate categories...)
-    const normalizedQuery = searchQuery.toLowerCase(); // obviously do this before attempting to filter on search query
-
-    // filtering on search query and category, and sort based on dropdown criterion and radio button option. this whole thing below used to be like a 20 lines long JSX expression, sortComparators above saves the day 
-    const productsVisible: Product[] = products.filter(product => product.title.toLowerCase().includes(normalizedQuery))
-    .filter(product => selectedCategories.length === 0 || selectedCategories.some(c => c.toLowerCase() === product.category.toLowerCase()))
-    .sort((a, b) => {
-        if (selectedDropdownOption === "None" || selectedSortOption === "None") return 0;
-        const comparator = sortComparators[selectedDropdownOption];
-        if (!comparator) return 0;
-        const result = comparator(a, b);
-        return selectedSortOption === "Low-high" ? result : -result;
-    });
+    // scan for categories in all products (yes, this means "men's clothing" and "Men's clothing" would be separate categories...)
+    const categories: string[] = [... new Set(products?.map(p => p.category))]; 
+    
+    // filter and sort products
+    const filteredProducts = filterProducts(products, selectedCategories, searchQuery);
+    const sortedProducts = sortProducts(filteredProducts,selectedDropdownOption, selectedSortOption);
 
     const SortDropdowns: React.FC = () => {
         return (
@@ -84,7 +77,7 @@ const Products: React.FC = () => {
                 <hr className="h-0.5 bg-gray-200"/>
                 <div className="overflow-y-auto py-2 px-1">
                     <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-8">
-                        {productsVisible
+                        {sortedProducts
                         .map(product => (
                             <ProductCard 
                             key={product.id} 
@@ -104,4 +97,4 @@ const Products: React.FC = () => {
     )
 }
 
-export default Products
+export default Products;
