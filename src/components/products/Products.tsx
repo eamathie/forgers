@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { type Product, type DropdownSetup } from "../../types/Types";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
-import { CategorySelector, MobileCategorySelector } from "./filtering/CategorySelector";
-import RadioButtonListCard from "./sorting/RadioButtonListCard";
+import { MobileCategorySelector } from "./filtering/CategorySelector";
 import Dropdown from "./sorting/Dropdown";
 import { sortComparators } from "./sorting/utils";
 import MobileSidebar from "../navbar/MobileSidebar";
@@ -60,20 +59,6 @@ const Products: React.FC = () => {
         return selectedSortOption === "Low-high" ? result : -result;
     });
 
-    const DesktopFilter: React.FC = () => {
-        return (
-            <div className="flex flex-row gap-5">
-                <CategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>
-                <div className="flex flex-col md:flex-row md:gap-3 w-1/2 ">
-                    <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} >
-                        {selectedDropdownOption && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
-                        <RadioButtonListCard options={dropDowns.find(d => d.title === selectedDropdownOption)!.options} selected={selectedSortOption} onSelect={handleSortingOptionSelected} />}
-                    </Dropdown>
-                </div>
-            </div>
-        );
-    };
-
     const MobileSort: React.FC = () => {
         return (
             <div className="flex flex-col gap-2">
@@ -95,10 +80,19 @@ const Products: React.FC = () => {
             <div className="flex flex-col gap-5 md:gap-10 py-3 h-screen">
                 <div className="flex flex-col gap-2 px-10 md:px-32">    
                     <Searchbar onChange={setSearchQuery}/>
-                    <div className="hidden md:block">
-                        <h2>Categories: </h2>
-                        <hr className="h-0.5 bg-gray-200"/>
-                        <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
+                    <div className="hidden md:block ">
+                        <div className="flex flex-row gap-10">
+                            <div className="w-1/4">
+                                <h2>Categories: </h2>
+                                <hr className="h-0.5 bg-gray-200"/>
+                                <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
+                            </div>
+                            <div className="w-1/4">
+                                <h2>Sort: </h2>
+                                <hr className="h-0.5 bg-gray-200"/>
+                                <MobileSort />
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="overflow-y-auto px-10 md:px-32 p-1">

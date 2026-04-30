@@ -75,9 +75,12 @@ const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect
                     </div>
                     {isOpen &&
                         <>
-                            <div className="block md:hidden">
-                                {createPortal(<MobileDropdownModal />, document.body)}
-                            </div>
+                            {createPortal(
+                                <div className="block md:hidden">
+                                    <MobileDropdownModal />
+                                </div>, 
+                                document.body
+                            )}
                             <div className="hidden md:block">
                                 <DesktopDropdownDrawer />
                             </div>
