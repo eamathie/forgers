@@ -58,7 +58,6 @@ const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect
     return (
         <div className="flex flex-col">
             <label>{name}: </label>
-            {/* <hr className="h-0.5 bg-gray-200"/> */}
             <div className="flex flex-col gap-3 justify-items-start items-start">
                 <div id="sorting" className="border-2 rounded-lg my-1">
                     <div 
@@ -84,7 +83,8 @@ const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect
                             <div className="hidden md:block">
                                 <DesktopDropdownDrawer />
                             </div>
-                        </>}
+                        </>
+                    }
                 </div>
                 {children}
 
