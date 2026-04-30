@@ -40,8 +40,3 @@ export type SelectedRadioButtonOption = {
     title: string,
     option: string,
 }
-
-export type DropdownSetup = {
-    title: string,
-    options: string[]
-}

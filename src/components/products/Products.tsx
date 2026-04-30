@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
 import { useFetch } from "../../utils/useFetch"
 import { URIProducts } from "../../utils/fake_store_api/Products";
-import { useEffect, useState } from "react";
-import { type Product, type DropdownSetup } from "../../types/Types";
+import { type Product } from "../../types/Types";
+import { dropDowns } from "./sorting/data";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
-import { MobileCategorySelector } from "./filtering/CategorySelector";
-import Dropdown from "./sorting/Dropdown";
-import { sortComparators } from "./sorting/utils";
 import MobileSidebar from "../navbar/MobileSidebar";
+import Dropdown from "./sorting/Dropdown";
+import { CategorySelector } from "./filtering/CategorySelector";
+import { sortComparators } from "./sorting/utils";
 
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product>(URIProducts);
@@ -39,18 +40,11 @@ const Products: React.FC = () => {
     if (error) return <div>Error: {error.message}</div>;
     
     const categories: string[] = [... new Set(products?.map(p => p.category))]; // scan for categories in all products (yes, this means "men's clothing" and "Men's clothing" would be separate categories...)
-    const dropDowns: DropdownSetup[] = [ // used for setting up dropdown and its option in <Dropdown /> and its child <RadioButtonListCard /> returned JSX
-        { title: "Price", options: ["Low-high", "High-low"] },
-        { title: "Rating", options: ["Low-high", "High-low"] },
-        { title: "None", options: []},
-    ]
-
     const normalizedQuery = searchQuery.toLowerCase(); // obviously do this before attempting to filter on search query
 
     // filtering on search query and category, and sort based on dropdown criterion and radio button option. this whole thing below used to be like a 20 lines long JSX expression, sortComparators above saves the day 
     const productsVisible: Product[] = products.filter(product => product.title.toLowerCase().includes(normalizedQuery))
     .filter(product => selectedCategories.length === 0 || selectedCategories.some(c => c.toLowerCase() === product.category.toLowerCase()))
-    .slice()
     .sort((a, b) => {
         if (selectedDropdownOption === "None" || selectedSortOption === "None") return 0;
         const comparator = sortComparators[selectedDropdownOption];
@@ -59,7 +53,7 @@ const Products: React.FC = () => {
         return selectedSortOption === "Low-high" ? result : -result;
     });
 
-    const MobileSort: React.FC = () => {
+    const SortDropdowns: React.FC = () => {
         return (
             <div className="flex flex-col gap-2">
                 <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} />
@@ -69,30 +63,36 @@ const Products: React.FC = () => {
         );
     };  
 
+    const DesktopFilterSort: React.FC = () => {
+        return (
+            <div className="flex flex-row gap-10">
+                <div className="w-1/4">
+                    <h2>Categories: </h2>
+                    <hr className="h-0.5 bg-gray-200"/>
+                    <CategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
+                </div>
+                <div className="w-1/4">
+                    <h2>Sort: </h2>
+                    <hr className="h-0.5 bg-gray-200"/>
+                    <SortDropdowns />
+                </div>
+            </div>
+        )        
+    }
+
     return (
         <div className="h-full">
             <span className="md:hidden">
                 <MobileSidebar nameChildrenNodesPairs={[
-                    {name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>},
-                    {name: "Sort", children: <MobileSort />}
+                    {name: "Categories", children: <CategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>},
+                    {name: "Sort", children: <SortDropdowns />}
                 ]}/>
             </span>
             <div className="flex flex-col gap-5 md:gap-10 py-3 h-screen">
                 <div className="flex flex-col gap-2 px-10 md:px-32">    
                     <Searchbar onChange={setSearchQuery}/>
                     <div className="hidden md:block ">
-                        <div className="flex flex-row gap-10">
-                            <div className="w-1/4">
-                                <h2>Categories: </h2>
-                                <hr className="h-0.5 bg-gray-200"/>
-                                <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
-                            </div>
-                            <div className="w-1/4">
-                                <h2>Sort: </h2>
-                                <hr className="h-0.5 bg-gray-200"/>
-                                <MobileSort />
-                            </div>
-                        </div>
+                        <DesktopFilterSort />
                     </div>
                 </div>
                 <div className="overflow-y-auto px-10 md:px-32 p-1">

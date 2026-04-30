@@ -14,7 +14,7 @@ interface CheckboxMobileProps {
     updateSelectedCategories: (value: string) => void;
 }
 
-const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, isChecked, updateSelectedCategories }) => {
+const Checkbox: React.FC<CheckboxMobileProps> = ({ label, isChecked, updateSelectedCategories }) => {
     const handleChanged = (value: string) => {
         updateSelectedCategories(value);
     }
@@ -48,33 +48,12 @@ const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, isChecked, updat
     )
 }
 
-export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, categories }) => {
-    return (
-        <div>
-            <h2>Categories</h2>
-            <hr className="h-0.5 bg-gray-200"/>
-            {categories.map(c => 
-            <div key={c} className="flex flex-row gap-2" >
-                <input 
-                name={`category-${c}`} 
-                type="checkbox" 
-                onClick={() => updateSelectedCategories(c)}
-                value={c}
-                />
-                <label>{c}</label>
-            </div>
-            )}
-        </div>
-    )   
-}
-
-
-export const MobileCategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {
+export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {
     
     return (
         <>
             {categories.map(c => 
-                <CheckboxMobile key={c} label={c} updateSelectedCategories={updateSelectedCategories} isChecked={selectedCategories.includes(c)}/>
+                <Checkbox key={c} label={c} updateSelectedCategories={updateSelectedCategories} isChecked={selectedCategories.includes(c)}/>
             )}
         </>
     )   
