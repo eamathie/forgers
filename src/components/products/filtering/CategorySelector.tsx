@@ -1,6 +1,4 @@
-import { useEffect } from "react"
-import { IconContext } from "react-icons"
-import { IoIosCheckbox, IoIosCheckboxOutline } from "react-icons/io"
+import Checkbox from "./Checkbox";
 
 interface CategorySelectorProps {
     updateSelectedCategories: (value: string) => void;
@@ -8,53 +6,12 @@ interface CategorySelectorProps {
     categories: string[];
 }
 
-interface CheckboxMobileProps {
-    label: string;
-    isChecked: boolean;
-    updateSelectedCategories: (value: string) => void;
-}
-
-const Checkbox: React.FC<CheckboxMobileProps> = ({ label, isChecked, updateSelectedCategories }) => {
-    const handleChanged = (value: string) => {
-        updateSelectedCategories(value);
-    }
-
-    useEffect(() => {
-        console.log(isChecked);
-    }, [isChecked])
-
-    return (
-        <label className="flex flex-row h-[50px] md:h-[35px] space-x-4 items-center">
-            <div className="flex items-center pointer-events-auto">
-                <input 
-                className="appearance-none"
-                type="checkbox" 
-                checked={isChecked}
-                onChange={() => handleChanged(label)}
-                />
-                <div className="block md:hidden">
-                    <IconContext.Provider value={{ color: "#eab308", size: "32" }}>
-                        {isChecked ? <IoIosCheckbox /> : <IoIosCheckboxOutline />}
-                    </IconContext.Provider>
-                </div>
-                <div className="hidden md:block">
-                    <IconContext.Provider value={{ color: "#eab308", size: "20" }}>
-                        {isChecked ? <IoIosCheckbox /> : <IoIosCheckboxOutline />}
-                    </IconContext.Provider>
-                </div>
-            </div>
-            <h2 className="text-md">{label}</h2>
-        </label>
-    )
-}
-
-export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {
-    
+export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {    
     return (
         <>
             {categories.map(c => 
                 <Checkbox key={c} label={c} updateSelectedCategories={updateSelectedCategories} isChecked={selectedCategories.includes(c)}/>
             )}
         </>
-    )   
-}
+    );   
+};
