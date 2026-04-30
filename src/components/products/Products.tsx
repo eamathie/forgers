@@ -74,7 +74,7 @@ const Products: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <hr className="h-1 bg-gray-200"/>
+                <hr className="h-0.5 bg-gray-200"/>
                 <div className="overflow-y-auto py-2 px-1">
                     <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-8">
                         {sortedProducts
@@ -92,6 +92,7 @@ const Products: React.FC = () => {
                         ))}
                     </div>
                 </div>
+                <hr className="h-0.5 bg-gray-200"/>
             </div>
         </div>
     )
