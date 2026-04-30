@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { IconContext } from "react-icons"
 import { IoIosCheckbox, IoIosCheckboxOutline } from "react-icons/io"
 
 interface CategorySelectorProps {
     updateSelectedCategories: (value: string) => void;
+    selectedCategories: string[];
     categories: string[];
 }
 
 interface CheckboxMobileProps {
     label: string;
+    isChecked: boolean;
     updateSelectedCategories: (value: string) => void;
 }
 
-const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, updateSelectedCategories }) => {
-    const [isChecked, setIsChecked] = useState(false);
-
+const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, isChecked, updateSelectedCategories }) => {
     const handleChanged = (value: string) => {
-        setIsChecked(prev => !prev);
         updateSelectedCategories(value);
     }
 
@@ -25,7 +24,7 @@ const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, updateSelectedCa
     }, [isChecked])
 
     return (
-        <label className="flex flex-row h-[50px] space-x-4 items-center">
+        <label className="flex flex-row h-[50px] md:h-[35px] space-x-4 items-center">
             <div className="flex items-center pointer-events-auto">
                 <input 
                 className="appearance-none"
@@ -33,9 +32,16 @@ const CheckboxMobile: React.FC<CheckboxMobileProps> = ({ label, updateSelectedCa
                 checked={isChecked}
                 onChange={() => handleChanged(label)}
                 />
-                <IconContext.Provider value={{ color: "#eab308", size: "32" }}>
-                    {isChecked ? <IoIosCheckbox /> : <IoIosCheckboxOutline />}
-                </IconContext.Provider>
+                <div className="block md:hidden">
+                    <IconContext.Provider value={{ color: "#eab308", size: "32" }}>
+                        {isChecked ? <IoIosCheckbox /> : <IoIosCheckboxOutline />}
+                    </IconContext.Provider>
+                </div>
+                <div className="hidden md:block">
+                    <IconContext.Provider value={{ color: "#eab308", size: "20" }}>
+                        {isChecked ? <IoIosCheckbox /> : <IoIosCheckboxOutline />}
+                    </IconContext.Provider>
+                </div>
             </div>
             <h2 className="text-md">{label}</h2>
         </label>
@@ -63,12 +69,12 @@ export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelect
 }
 
 
-export const MobileCategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, categories }) => {
+export const MobileCategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {
     
     return (
         <>
             {categories.map(c => 
-                <CheckboxMobile key={c} label={c} updateSelectedCategories={updateSelectedCategories}/>
+                <CheckboxMobile key={c} label={c} updateSelectedCategories={updateSelectedCategories} isChecked={selectedCategories.includes(c)}/>
             )}
         </>
     )   

@@ -119,6 +119,7 @@ const Navbar: React.FC = () => {
                         </HoverableIconWrapper>
                     </div>
                 </nav>    
+                <hr className="h-0.5 bg-yellow-300"/>
             </>
         )
     }

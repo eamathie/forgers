@@ -76,7 +76,7 @@ const Products: React.FC = () => {
 
     const MobileSort: React.FC = () => {
         return (
-            <div className="flex flex-col  gap-2">
+            <div className="flex flex-col gap-2">
                 <Dropdown name="Criterion" selected={selectedDropdownOption} criterion={dropDowns.map(d => d.title)} onSelect={handleDropdownSelected} />
                 {selectedDropdownOption !== "None" && dropDowns.find(d => d.title === selectedDropdownOption)?.options && 
                 <Dropdown name="Option" selected={selectedSortOption} criterion={dropDowns.find(d => d.title === selectedDropdownOption)!.options} onSelect={handleSortingOptionSelected} />}
@@ -85,19 +85,21 @@ const Products: React.FC = () => {
     };  
 
     return (
-        <>
+        <div className="h-full">
             <span className="md:hidden">
                 <MobileSidebar nameChildrenNodesPairs={[
-                    {name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} categories={categories}/>},
+                    {name: "Categories", children: <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>},
                     {name: "Sort", children: <MobileSort />}
                 ]}/>
             </span>
-            <div className="flex flex-col gap-5 md:gap-10 my-3 h-screen">
-                <div className="px-10 md:px-32">    
+            <div className="flex flex-col gap-5 md:gap-10 py-3 h-screen">
+                <div className="flex flex-col gap-2 px-10 md:px-32">    
                     <Searchbar onChange={setSearchQuery}/>
-                </div>
-                <div className="hidden md:block">
-                    <DesktopFilter />
+                    <div className="hidden md:block">
+                        <h2>Categories: </h2>
+                        <hr className="h-0.5 bg-gray-200"/>
+                        <MobileCategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
+                    </div>
                 </div>
                 <div className="overflow-y-auto px-10 md:px-32 p-1">
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-8">
@@ -117,7 +119,7 @@ const Products: React.FC = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 
