@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { GoChevronDown } from "react-icons/go";
 import { NavLink } from "react-router";
+import ChevronCircle from "./ChevronCircle";
 
 interface MobileSidebarProps {
     nameChildrenNodesPairs?: NameChildrenNodesPair[];
@@ -19,26 +19,6 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
     useEffect(() => {
         setMounted(true);
     }, [])
-
-    // The circular backround behind the sidebar's GoChevronDown-icon
-    const ChevronCircle: React.FC<{ children: ReactNode }> = ({ children }) => {
-        return (
-            <span className={`
-                absolute 
-                left-[105%] 
-                top-[45%]
-                w-14 h-14
-                rounded-full
-                bg-gray-800
-                text-white
-                flex items-center justify-center
-                `}
-                onClick={() => setIsOpen(prev => !prev)}
-                >
-                {children}
-            </span>
-        )
-    }
     
     return (
         <div className={`duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'} absolute h-full w-[45%] md:w-[25%] text-lg md:text-sm text-gray-200 bg-gray-800 z-20`}>
@@ -69,16 +49,10 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
                     )}
                 </div>
             </div>
-            <ChevronCircle>
-                <GoChevronDown
-                size={40}
-                rotate={90}
-                className={`
-                    duration-150 ease-in-out ${
-                    isOpen ? "rotate-90" : "-rotate-90"
-                }`}
-                />
-            </ChevronCircle>
+            <ChevronCircle 
+                isOpen={isOpen} 
+                onClick={() => setIsOpen(prev => !prev)}
+            />
         </div>      
     )
 }
