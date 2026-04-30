@@ -3,12 +3,13 @@ import { useFetch } from "../../utils/useFetch"
 import { URIProducts } from "../../utils/fake_store_api/Products";
 import { type Product } from "../../types/Types";
 import { dropDowns } from "./sorting/data";
+import { CategorySelector } from "./filtering/CategorySelector";
+import { sortComparators } from "./sorting/utils";
 import ProductCard from "./ProductCard";
 import Searchbar from "./filtering/Seachbar";
 import MobileSidebar from "../navbar/MobileSidebar";
 import Dropdown from "./sorting/Dropdown";
-import { CategorySelector } from "./filtering/CategorySelector";
-import { sortComparators } from "./sorting/utils";
+import DesktopFilterSort from "./DesktopFilterSort";
 
 const Products: React.FC = () => {
     const {data: products, loading, error } = useFetch<Product>(URIProducts);
@@ -63,23 +64,6 @@ const Products: React.FC = () => {
         );
     };  
 
-    const DesktopFilterSort: React.FC = () => {
-        return (
-            <div className="flex flex-row gap-10">
-                <div className="w-1/4">
-                    <h2>Categories: </h2>
-                    <hr className="h-0.5 bg-gray-200"/>
-                    <CategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>
-                </div>
-                <div className="w-1/4">
-                    <h2>Sort: </h2>
-                    <hr className="h-0.5 bg-gray-200"/>
-                    <SortDropdowns />
-                </div>
-            </div>
-        )        
-    }
-
     return (
         <div className="h-full">
             <span className="md:hidden">
@@ -88,14 +72,17 @@ const Products: React.FC = () => {
                     {name: "Sort", children: <SortDropdowns />}
                 ]}/>
             </span>
-            <div className="flex flex-col gap-5 md:gap-10 py-3 h-screen">
-                <div className="flex flex-col gap-2 px-10 md:px-32">    
+            <div className="flex flex-col py-3 px-10 md:px-32 h-screen">
+                <div className="flex flex-col mb-3 gap-2">    
                     <Searchbar onChange={setSearchQuery}/>
-                    <div className="hidden md:block ">
-                        <DesktopFilterSort />
+                    <div className="hidden md:block">
+                        <div className="flex flex-col gap-1">
+                            <DesktopFilterSort updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories} SortDropdowns={SortDropdowns}  />
+                        </div>
                     </div>
                 </div>
-                <div className="overflow-y-auto px-10 md:px-32 p-1">
+                <hr className="h-0.5 bg-gray-200"/>
+                <div className="overflow-y-auto py-2 px-1">
                     <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-8">
                         {productsVisible
                         .map(product => (
