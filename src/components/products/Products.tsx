@@ -96,7 +96,7 @@ const Products: React.FC = () => {
                     </div>
                 </div>
                 <div className="overflow-y-auto px-10 md:px-32 p-1">
-                    <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-8">
+                    <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-8">
                         {productsVisible
                         .map(product => (
                             <ProductCard 
