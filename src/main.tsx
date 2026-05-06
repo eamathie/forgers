@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import AuthProvider from './auth/authContext.tsx'
+import { SidebarProvider } from './components/navbar/SidebarContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <SidebarProvider>
+        <App />
+      </SidebarProvider>
     </AuthProvider>
   </StrictMode>
 )

@@ -1,27 +1,14 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import ChevronCircle from "./ChevronCircle";
 import NavigationLinks from "./NavigationLinks";
+import { useSidebar } from "./SidebarContext";
 
-interface MobileSidebarProps {
-    nameChildrenNodesPairs?: NameChildrenNodesPair[];
-}
+const MobileSidebar = ({ nameChildrenNodesPairs }: { nameChildrenNodesPairs?: {name: string, children: ReactNode}[]}) => {
+    const { isOpen, toggle } = useSidebar();
+    useEffect(() => {}, []);
 
-interface NameChildrenNodesPair {
-    name: string;
-    children: ReactNode
-}
-
-const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs }) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
-
-    // this little work-around makes the sidebar ease-in-out work
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-    
     return (
-        <div className={`absolute inset-y-0 left-0 w-[50%] bg-gray-800 text-gray-200 z-20 transform duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`absolute inset-y-0 left-0 w-[50%] bg-gray-800 text-gray-200 z-20 transform duration-300 ease-in-out ${/* mounted &&  */isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className="h-full min-h-0 overflow-y-auto p-6 flex flex-col gap-8">
                 <div className="flex flex-col gap-3">
                     <div>
@@ -46,7 +33,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
             </div>
             <ChevronCircle 
                 isOpen={isOpen} 
-                onClick={() => setIsOpen(prev => !prev)}
+                onClick={toggle}
             />
         </div>      
     )
