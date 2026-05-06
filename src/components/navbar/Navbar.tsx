@@ -8,8 +8,9 @@ import { useFetch } from "../../utils/useFetch";
 import { URICartsAll } from "../../utils/fake_store_api/Carts";
 import type { Cart } from "../../types/Types";
 import ProductCardList from "../../cart/ProductCardList";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 import HoverableIconWrapper from "../effects/HoverableIconWrapper";
+import NavigationLinks from "./NavigationLinks";
 
 const Navbar: React.FC = () => {
     const [userDialogueActive, setUserDialogueActive] = useState(false);
@@ -48,12 +49,7 @@ const Navbar: React.FC = () => {
             <div className="flex-none h-[60px] md:h-[50px] w-full px-6 md:px-10 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                 <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
                 <div className="hidden md:block">
-                    <nav className="flex flex-row gap-5 items-center">
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="/" end>Store</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Exclusive deals</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>About</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'}`} to="*" end>Contact</NavLink>
-                    </nav>
+                    <NavigationLinks />
                 </div>
                 <div className="flex flex-row items-center gap-4 md:gap-2">
                     <HoverableIconWrapper highlightOn={shoppingCartActive} onClick={handleShoppingCartClicked}>

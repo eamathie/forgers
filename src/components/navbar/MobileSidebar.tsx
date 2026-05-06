@@ -1,6 +1,6 @@
 import { useEffect, useState, type ReactNode } from "react";
-import { NavLink } from "react-router";
 import ChevronCircle from "./ChevronCircle";
+import NavigationLinks from "./NavigationLinks";
 
 interface MobileSidebarProps {
     nameChildrenNodesPairs?: NameChildrenNodesPair[];
@@ -28,12 +28,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
                         <h2>Explore</h2>
                         <hr className="bg-gray-200"/>
                     </div>
-                    <div className="flex flex-col gap-1 items-stretch">
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="/" end>Store</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Exclusive deals</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>About</NavLink>
-                        <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 rounded-md px-2 py-1`} to="*" end>Contact</NavLink>
-                    </div>
+                    <NavigationLinks />
                 </div>
                 <div className="flex flex-col gap-8">
                     {nameChildrenNodesPairs?.map(e => 
