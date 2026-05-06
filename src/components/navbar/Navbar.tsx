@@ -68,11 +68,11 @@ const Navbar: React.FC = () => {
             </div>
             <hr className="flex-none h-0.5 bg-yellow-300"/>
             {userDialogueActive && 
-                <div className="absolute right-1">
+                <div className="absolute right-1 top-[60px] md:top-[50px] z-20">
                     <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />
                 </div> }
             {shoppingCartActive && 
-            <div className="absolute right-1">
+            <div className="absolute right-1 top-[60px] md:top-[50px] z-20">
                 <ProductCardList cart={userCart ?? null} onClickOutside={() => setShoppingCartActive(false)} />
             </div>}
         </IconContext.Provider>
