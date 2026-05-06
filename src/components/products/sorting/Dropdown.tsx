@@ -38,17 +38,17 @@ const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect
     const MobileDropdownModal: React.FC = () => {
         return (
             <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 bg-gray-800 bg-opacity-80 pointer-events-none z-20">
-                <div className="flex flex-col gap-2 h-[20%] w-[50%] bg-gray-800 rounded-lg outline outline-gray-400 text-xl text-gray-200 p-3 pointer-events-auto">
+                <div className="flex flex-col gap-2 w-[50%] bg-gray-800 rounded-lg outline outline-gray-400 text-xl text-gray-200 p-3 pointer-events-auto">
                     <h2>Select option</h2>
                     <hr className="h-0.5 bg-gray-200" />
                     {criterion.map((c, index) => (
-                    <div 
-                    className="flex-1 flex items-center rounded-lg bg-gray-700 px-2"
-                    key={index} 
-                    onClick={() => handleClicked(c)}
-                    >
-                        {c}
-                    </div>
+                        <div 
+                        className="flex items-center rounded-lg bg-gray-700 px-2"
+                        key={index} 
+                        onClick={() => handleClicked(c)}
+                        >
+                            {c}
+                        </div>
                     ))}
                 </div>
             </div>

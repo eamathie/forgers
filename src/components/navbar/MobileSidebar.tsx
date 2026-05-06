@@ -21,7 +21,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({ nameChildrenNodesPairs })
     }, [])
     
     return (
-        <div className={`absolute inset-y-0 left-0 w-[45%] md:w-[25%] bg-gray-800 text-gray-200 z-20 transform duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className={`absolute inset-y-0 left-0 w-[50%] bg-gray-800 text-gray-200 z-20 transform duration-300 ease-in-out ${mounted && isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className="h-full min-h-0 overflow-y-auto p-6 flex flex-col gap-8">
                 <div className="flex flex-col gap-3">
                     <div>
