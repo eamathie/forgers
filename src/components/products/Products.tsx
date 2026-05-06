@@ -19,20 +19,6 @@ const Products: React.FC = () => {
     const [selectedDropdownOption, setSelectedDropdownOption] = useState<string>("None");
     const { setContent } = useSidebar();
 
-    // scan for categories in all products (yes, this means "men's clothing" and "Men's clothing" would be separate categories...)
-    const categories = useMemo(() => 
-        products ? [...new Set(products.map(p => p.category))] : []
-    , [products]);
-
-    // filter and sort products
-    const filteredProducts = useMemo(() => 
-        filterProducts(products, selectedCategories, searchQuery)
-    , [products, selectedCategories, searchQuery]);
-    
-    const sortedProducts = useMemo(() =>
-        sortProducts(filteredProducts,selectedDropdownOption, selectedSortOption)
-    , [filteredProducts,selectedDropdownOption, selectedSortOption]);
-    
     // implicitly update selectedCategories array when CategorySelector checkboxes are changed
     const updateSelectedCategories = (value: string) => {
         setSelectedCategories(prev => {
@@ -45,6 +31,20 @@ const Products: React.FC = () => {
     
     const handleDropdownSelected = (criterion: string) => { setSelectedDropdownOption(criterion) };
     const handleSortingOptionSelected = (option: string) => { setSelectedSortOption(option) };
+    
+    // scan for categories in all products (yes, this means "men's clothing" and "Men's clothing" would be separate categories...)
+    const categories = useMemo(() => 
+        products ? [...new Set(products.map(p => p.category))] : []
+    , [products]);
+
+    // filter and sort products
+    const filteredProducts = useMemo(() => 
+        filterProducts(products, selectedCategories, searchQuery)
+    , [products, selectedCategories, searchQuery]);
+    
+    const sortedProducts = useMemo(() =>
+        sortProducts(filteredProducts, selectedDropdownOption, selectedSortOption)
+    , [filteredProducts,selectedDropdownOption, selectedSortOption]);
     
     // reset radio buttons (all unchecked) when selecting new sorting category from dropdown
     useEffect(() => {
@@ -60,7 +60,6 @@ const Products: React.FC = () => {
             </div>
         );
     };  
-
     
     const sidebarContent = useMemo(
         () => [
@@ -82,10 +81,12 @@ const Products: React.FC = () => {
         [categories, selectedCategories, selectedDropdownOption, selectedSortOption]
     );
     
+    // set sidebar content
     useEffect(() => {
         setContent(sidebarContent);
     }, [sidebarContent, setContent]);
 
+    // reset sidebar content when page exited
     useEffect(() => {
         return () => setContent(undefined);
     }, [setContent])
