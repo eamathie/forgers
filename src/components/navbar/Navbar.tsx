@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
     
     return (
         <IconContext.Provider value={{ color: "white" }}>
-            <div className="h-[60px] md:h-[50px] w-full px-6 md:px-10 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
+            <div className="flex-none h-[60px] md:h-[50px] w-full px-6 md:px-10 flex flex-row justify-between items-center text-gray-200 bg-gray-800">
                 <Link className="text-yellow-300 text-2xl font-bold italic" to="/">Forgers™</Link>
                 <div className="hidden md:block">
                     <nav className="flex flex-row gap-5 items-center">
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
                     </HoverableIconWrapper>
                 </div>            
             </div>
-            <hr className="h-0.5 bg-yellow-300"/>
+            <hr className="flex-none h-0.5 bg-yellow-300"/>
             {userDialogueActive && 
                 <div className="absolute right-1">
                     <LoginRegister onClickOutside={() => setUserDialogueActive(false)} />

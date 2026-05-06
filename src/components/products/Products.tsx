@@ -58,14 +58,14 @@ const Products: React.FC = () => {
     };  
 
     return (
-        <div className="h-full">
+        <div className="relative flex-1 min-h-0 flex flex-col">
             <span className="md:hidden">
                 <MobileSidebar nameChildrenNodesPairs={[
                     {name: "Categories", children: <CategorySelector updateSelectedCategories={updateSelectedCategories} selectedCategories={selectedCategories} categories={categories}/>},
                     {name: "Sort", children: <SortDropdowns />}
                 ]}/>
             </span>
-            <div className="flex flex-col py-3 px-10 md:px-32 h-screen">
+            <div className="flex-1 flex flex-col py-3 px-10 md:px-32 min-h-0">
                 <div className="flex flex-col mb-3 gap-2">    
                     <Searchbar onChange={setSearchQuery}/>
                     <div className="hidden md:block">
@@ -75,7 +75,7 @@ const Products: React.FC = () => {
                     </div>
                 </div>
                 <hr className="h-0.5 bg-gray-200"/>
-                <div className="overflow-y-auto py-2 px-1">
+                <div className="flex-1 min-h-0 overflow-y-auto py-2 px-1">
                     <div className="grid grid-cols-[repeat(auto-fill,minmax(120px,1fr))] gap-8">
                         {sortedProducts
                         .map(product => (
