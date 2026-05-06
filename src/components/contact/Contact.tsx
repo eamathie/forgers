@@ -3,37 +3,53 @@ import type { ContentSection } from "../../utils/content/types/types";
 
 const paragraphs: ContentSection[] = [
     {
-        title: "About Forgers™",
+        title: "Contact Forgers™",
         content: [
             {
                 type: "text",
                 value:
-                    "Forgers™ is a modern lifestyle store bringing together clothing, technology, and jewelry in one curated space. We focus on pieces that balance style and function, so you can express yourself through what you wear, use, and accessorize with—without overthinking it."
+                    "We’re here to help. Whether you have a question about an order, need assistance with a product, or just want to get in touch, the Forgers™ team is happy to hear from you."
             }
         ]
     },
     {
-        title: "Curated for Everyday Style",
+        title: "Get in Touch",
         content: [
             {
                 type: "text",
                 value:
-                    "Our collections are chosen to work together, making it easy to mix everyday essentials with standout details that fit your personal style. Whether you’re upgrading your look or adding the finishing touch, everything is designed to feel cohesive and effortless."
+                    "For general inquiries, support questions, or feedback, reach out to us anytime:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Email: support@forgers.com",
+                    "Response time: Within 1–2 business days"
+                ]
+            },
+            {
+                type: "text",
+                value: "We aim to respond as quickly as possible and make sure you get the help you need."
             }
         ]
     },
     {
-        title: "No Trends, Just Taste",
+        title: "Orders & Support",
         content: [
             {
                 type: "text",
                 value:
-                    "At Forgers™, it’s not about chasing trends. It’s about offering products that feel current, well‑considered, and easy to make your own—pieces that feel right today and still make sense tomorrow."   
+                    "Interested in working with Forgers™? For brand collaborations, partnerships, or business inquiries, please contact:"   
+            },
+            {
+                type: "text",
+                value:
+                    "Email: collaborations@forgers.com"
             }
         ]
     },
     {
-        title: "Why the Name Forgers™",
+        title: "Collaborations & Partnerships",
         content: [
             {
                 type: "text",
@@ -48,23 +64,31 @@ const paragraphs: ContentSection[] = [
         ]
     },
     {
-        title: "Always Evolving",
+        title: "Stay Connected",
         content: [
             {
                 type: "text",
                 value:
-                    "We’re always exploring new ideas and refining our selection to bring you products that feel fresh, useful, and authentic."
+                    "Follow Forgers™ for updates, new arrivals, and inspiration:"
+            },
+            {
+                type: "list",
+                items: [
+                    "Instagram",
+                    "Facebook",
+                    "X (Twitter)"
+                ]
             },
             {
                 type: "text",
-                value:
-                    "Forgers™ — made for those who forge their own style."
+                value: 
+                    "Thanks for reaching out to Forgers™.\nWe look forward to hearing from you."
             }
         ]
     }
 ];
 
-const About: React.FC = () => {
+const Contact: React.FC = () => {
     return (
         <div className="relative flex-1 min-h-0 overflow-y-auto">
             <div className="flex flex-col gap-8 p-8">
@@ -79,4 +103,4 @@ const About: React.FC = () => {
     );
 };
 
-export default About;
+export default Contact;

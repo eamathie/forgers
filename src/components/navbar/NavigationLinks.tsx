@@ -6,7 +6,7 @@ const NavigationLinks: React.FC = () => {
             <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="/" end>Store</NavLink>
             <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="*" end>Exclusive deals</NavLink>
             <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="/about" end>About</NavLink>
-            <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="*" end>Contact</NavLink>
+            <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="/contact" end>Contact</NavLink>
         </nav>
     );
 };
