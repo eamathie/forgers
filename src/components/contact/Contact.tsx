@@ -6,9 +6,12 @@ const paragraphs: ContentSection[] = [
         title: "Contact Forgers™",
         content: [
             {
-                type: "text",
-                value:
-                    "We’re here to help. Whether you have a question about an order, need assistance with a product, or just want to get in touch, the Forgers™ team is happy to hear from you."
+                type: "rich-text",
+                spans: [
+                    { text: "We’re here to help. Whether you have a question about an order, need assistance with a product, or just want to get in touch, the " },
+                    { text: "Forgers™", marks: ["bold"] },
+                    { text: " team is happy to hear from you." }
+                ]   
             }
         ]
     },
@@ -21,10 +24,17 @@ const paragraphs: ContentSection[] = [
                     "For general inquiries, support questions, or feedback, reach out to us anytime:"
             },
             {
-                type: "list",
-                items: [
-                    "Email: support@forgers.com",
-                    "Response time: Within 1–2 business days"
+                type: "rich-text",
+                spans: [
+                    { text: "Email: ", marks: ["bold"] },
+                    { text: "support@forgers.com" }
+                ]
+            },
+            {
+                type: "rich-text",
+                spans: [
+                    { text: "Response time: ", marks: ["bold"] },
+                    { text: "Within 1–2 business days" }
                 ]
             },
             {
@@ -39,12 +49,7 @@ const paragraphs: ContentSection[] = [
             {
                 type: "text",
                 value:
-                    "Interested in working with Forgers™? For brand collaborations, partnerships, or business inquiries, please contact:"   
-            },
-            {
-                type: "text",
-                value:
-                    "Email: collaborations@forgers.com"
+                    "If you’re contacting us about an order, please include your order number where possible. This helps us assist you faster and more accurately."
             }
         ]
     },
@@ -54,12 +59,14 @@ const paragraphs: ContentSection[] = [
             {
                 type: "text",
                 value:
-                    "The name Forgers™ reflects the idea of shaping something with intention. Just like forged materials are strengthened through careful craft, personal style and identity are shaped through thoughtful choices."
+                    "Interested in working with Forgers™? For brand collaborations, partnerships, or business inquiries, please contact:"   
             },
             {
-                type: "text",
-                value:
-                    "Forgers™ represents confidence, creativity, and the freedom to define your own look—without limits."
+                type: "rich-text",
+                spans: [
+                    { text: "Email: ", marks: ["bold"] },
+                    { text: "collaborations@forgers.com"}
+                ]
             }
         ]
     },
@@ -67,9 +74,12 @@ const paragraphs: ContentSection[] = [
         title: "Stay Connected",
         content: [
             {
-                type: "text",
-                value:
-                    "Follow Forgers™ for updates, new arrivals, and inspiration:"
+                type: "rich-text",
+                spans: [
+                    { text: "Follow " },
+                    { text: "Forgers™ ", marks: ["bold"] },
+                    { text: "for updates, new arrivals, and inspiration:" }
+                ]
             },
             {
                 type: "list",

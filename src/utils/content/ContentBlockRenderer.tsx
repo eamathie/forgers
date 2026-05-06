@@ -1,21 +1,38 @@
-import { type ContentBlock } from "./types/types";
+import { type ContentBlock, type TextSpan } from "./types/types";
 
-interface Props {
-    block: ContentBlock;
-}
+const renderSpan = (span: TextSpan, index: number) => {
+    let el: React.ReactNode = span.text;
 
-const ContentBlockRenderer: React.FC<Props> = ({ block }) => {
+    if (span.marks?.includes("italic")) {
+        el = <em>{el}</em>;
+    }
+
+    if (span.marks?.includes("bold")) {
+        el = <strong>{el}</strong>;
+    }
+
+    return <span key={index}>{el}</span>;
+};
+
+const ContentBlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
     switch (block.type) {
         case "text":
-            return <p className="text-base leading-relaxed">{block.value}</p>;
+            return <p>{block.value}</p>;
 
         case "list":
             return (
-                <ul className="list-disc pl-5 space-y-1">
+                <ul className="list-disc pl-5">
                     {block.items.map(item => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
+            );
+
+        case "rich-text":
+            return (
+                <p className="text-base leading-relaxed">
+                    {block.spans.map(renderSpan)}
+                </p>
             );
 
         default:
