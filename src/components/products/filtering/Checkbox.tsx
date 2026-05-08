@@ -12,8 +12,10 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, isChecked, updateSelectedCat
         updateSelectedCategories(value);
     };
 
+    const capitalizedLabel = label.charAt(0).toUpperCase() + label.slice(1);
+
     return (
-        <label className="flex flex-row h-[50px] md:h-[35px] space-x-4 items-center">
+        <label className="flex flex-row h-[50px] md:h-[35px] space-x-1 items-center">
             <div className="flex items-center pointer-events-auto">
                 <input 
                 className="appearance-none"
@@ -32,7 +34,7 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, isChecked, updateSelectedCat
                     </IconContext>
                 </div>
             </div>
-            <h2 className="text-md">{label}</h2>
+            <h2 className="text-md">{capitalizedLabel}</h2>
         </label>
     );
 };

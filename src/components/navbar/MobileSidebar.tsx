@@ -1,11 +1,10 @@
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 import ChevronCircle from "./ChevronCircle";
 import NavigationLinks from "./NavigationLinks";
 import { useSidebar } from "./SidebarContext";
 
 const MobileSidebar = ({ nameChildrenNodesPairs }: { nameChildrenNodesPairs?: {name: string, children: ReactNode}[]}) => {
     const { isOpen, toggle } = useSidebar();
-    useEffect(() => {}, []);
 
     return (
         <div className={`absolute inset-y-0 left-0 w-[50%] bg-gray-800 text-gray-200 z-20 transform duration-300 ease-in-out ${/* mounted &&  */isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
