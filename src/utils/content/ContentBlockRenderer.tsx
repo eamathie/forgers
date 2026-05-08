@@ -17,11 +17,11 @@ const renderSpan = (span: TextSpan, index: number) => {
 const ContentBlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
     switch (block.type) {
         case "text":
-            return <p>{block.value}</p>;
+            return <p className="text-base md:text-sm">{block.value}</p>;
 
         case "list":
             return (
-                <ul className="list-disc pl-5">
+                <ul className="text-base md:text-sm list-disc pl-5">
                     {block.items.map(item => (
                         <li key={item}>{item}</li>
                     ))}
@@ -30,7 +30,7 @@ const ContentBlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
 
         case "rich-text":
             return (
-                <p className="text-base leading-relaxed">
+                <p className="text-base md:text-sm leading-relaxed">
                     {block.spans.map(renderSpan)}
                 </p>
             );

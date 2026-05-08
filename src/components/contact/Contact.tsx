@@ -101,7 +101,7 @@ const paragraphs: ContentSection[] = [
 const Contact: React.FC = () => {
     return (
         <div className="relative flex-1 min-h-0 overflow-y-auto">
-            <div className="flex flex-col gap-8 p-8">
+            <div className="flex flex-col gap-8 p-8 md:p-10">
                 {paragraphs.map(section => (
                     <ContentSectionRenderer
                         key={section.title}
