@@ -1,7 +1,7 @@
-import ContentSectionRenderer from "../../utils/content/ContentSectionRenderer";
+import ContentRenderer from "../../utils/content/ContentRenderer";
 import type { ContentSection } from "../../utils/content/types/types";
 
-const paragraphs: ContentSection[] = [
+const sections: ContentSection[] = [
     {
         title: "Contact Forgers™",
         content: [
@@ -102,12 +102,7 @@ const Contact: React.FC = () => {
     return (
         <div className="relative flex-1 min-h-0 overflow-y-auto">
             <div className="flex flex-col gap-8 p-8 md:p-10">
-                {paragraphs.map(section => (
-                    <ContentSectionRenderer
-                        key={section.title}
-                        section={section}
-                    />
-                ))}
+                <ContentRenderer sections={sections}/>
             </div>
         </div>
     );
