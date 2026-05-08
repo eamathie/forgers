@@ -5,7 +5,7 @@ interface ProductCardHorisontalProps {
     quantity: number;
 }
 
-const ProductCardHorisontal: React.FC<ProductCardHorisontalProps> = ({ product, quantity }) => {
+const ProductCardHorisontal = ({ product, quantity }: ProductCardHorisontalProps) => {
     return (
         <div className="flex flex-row gap-5 h-24 bg-white rounded-lg outline outline-gray-300 shadow-lg text-xs text-left p-4">
             <div className="w-1/4 flex h-full items-center justify-center">

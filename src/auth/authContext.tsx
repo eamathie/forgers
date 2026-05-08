@@ -3,7 +3,7 @@ import type { User, UserContextType } from "./types";
 
 export const AuthContext = createContext<UserContextType | null>(null);
 
-const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+const AuthProvider = ({ children }: {children: React.ReactNode}) => {
     const [user, setUser] = useState<User | null>(null);
     const updateUser = (user: User | null) => setUser(user);
 

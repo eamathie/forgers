@@ -11,7 +11,7 @@ import Dropdown from "./sorting/Dropdown";
 import DesktopFilterSort from "./DesktopFilterSort";
 import { useSidebar } from "../navbar/SidebarContext";
 
-const Products: React.FC = () => {
+const Products = () => {
     const { data: products, loading, error } = useFetch<Product>(URIProducts);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -61,8 +61,8 @@ const Products: React.FC = () => {
         );
     };  
     
-    const sidebarContent = useMemo(
-        () => [
+    const sidebarContent = useMemo(() =>
+        [
             {
                 name: "Categories",
                 children: (

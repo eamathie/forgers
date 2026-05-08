@@ -1,11 +1,7 @@
 import { type ContentSection } from "./types/types";
 import ContentBlockRenderer from "./ContentBlockRenderer";
 
-interface Props {
-    section: ContentSection;
-}
-
-const ContentSectionRenderer: React.FC<Props> = ({ section }) => {
+const ContentSectionRenderer = ({ section }: { section: ContentSection }) => {
     return (
         <section className="flex flex-col gap-3">
             <h2 className="text-xl md:text-lg font-bold">{section.title}</h2>

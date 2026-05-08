@@ -2,7 +2,7 @@ interface SearchBarProps {
     onChange: (value: string) => void
 };
 
-const Searchbar: React.FC<SearchBarProps> = ({ onChange }) => {
+const Searchbar = ({ onChange }: SearchBarProps) => {
     return (
         <div className="h-full md:h-16 flex flex-col">
             <label htmlFor="searchBar" className="text-lg md:text-base">Search: </label>

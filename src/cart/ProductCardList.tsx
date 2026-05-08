@@ -10,7 +10,7 @@ interface ProductCardListProps {
     onClickOutside: () => void;
 }
 
-const ProductCardList: React.FC<ProductCardListProps> = ({ cart, onClickOutside }) => {
+const ProductCardList = ({ cart, onClickOutside }: ProductCardListProps) => {
     const productIds = cart?.products.map(p => p.productId.toString());
     const productsUrl = cart ? URIProducts : undefined;
     const {data: products, loading, error } = useFetch<Product>(productsUrl, productIds)

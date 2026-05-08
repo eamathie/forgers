@@ -3,7 +3,7 @@ import Navbar from "./components/navbar/Navbar";
 import MobileSidebar from "./components/navbar/MobileSidebar";
 import { useSidebar } from "./components/navbar/SidebarContext";
 
-const Layout: React.FC = () => {
+const Layout = () => {
     const { content } = useSidebar();
     return (
             <div className="flex flex-col h-screen">

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-const NavigationLinks: React.FC = () => {
+const NavigationLinks = () => {
     return (
         <nav className="flex flex-col gap-1 items-stretch md:flex-row md:gap-5 md:items-center">
             <NavLink className={({ isActive }) => `hover:underline ${isActive && 'underline'} bg-gray-600 md:bg-transparent rounded-md px-2 py-1.5`} to="/" end>Store</NavLink>

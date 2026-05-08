@@ -3,7 +3,7 @@ interface LoginRegButtonProps {
     onClick: () => void;
 }
 
-const LoginRegButton: React.FC<LoginRegButtonProps> = ({ name, onClick }) => {
+const LoginRegButton = ({ name, onClick }: LoginRegButtonProps) => {
     return (
         <button 
         className="bg-yellow-300 rounded-lg outline outline-yellow-500 shadow-md p-1"

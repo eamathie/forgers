@@ -4,7 +4,7 @@ interface TextFieldProps {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const TextField: React.FC<TextFieldProps> = ({ name, type, onChange }) => {
+const TextField = ({ name, type, onChange }: TextFieldProps) => {
     return (
         <div className="h-1/2 flex flex-col">
             <label htmlFor="searchBar">{name}: </label>

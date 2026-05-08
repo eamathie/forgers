@@ -6,7 +6,7 @@ interface CategorySelectorProps {
     categories: string[];
 }
 
-export const CategorySelector: React.FC<CategorySelectorProps> = ({ updateSelectedCategories, selectedCategories, categories }) => {    
+export const CategorySelector = ({ updateSelectedCategories, selectedCategories, categories }: CategorySelectorProps) => {    
     return (
         <>
             {categories.map(c => 

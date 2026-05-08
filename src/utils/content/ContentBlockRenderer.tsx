@@ -14,7 +14,7 @@ const renderSpan = (span: TextSpan, index: number) => {
     return <span key={index}>{el}</span>;
 };
 
-const ContentBlockRenderer: React.FC<{ block: ContentBlock }> = ({ block }) => {
+const ContentBlockRenderer = ({ block }: { block: ContentBlock }) => {
     switch (block.type) {
         case "text":
             return <p className="text-base md:text-sm">{block.value}</p>;

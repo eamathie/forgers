@@ -10,7 +10,7 @@ interface DropdownProps {
     children?: React.ReactNode;
 }
 
-const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect, children }) => {
+const Dropdown = ({ name, criterion, selected, onSelect, children }: DropdownProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleClicked = (criterion: string) => {
@@ -35,7 +35,7 @@ const Dropdown: React.FC<DropdownProps> = ({ name, criterion, selected, onSelect
         );
     };
 
-    const MobileDropdownModal: React.FC = () => {
+    const MobileDropdownModal = () => {
         return (
             <div className="fixed flex justify-center items-center top-0 right-0 left-0 bottom-0 bg-gray-800 bg-opacity-80 pointer-events-none z-20">
                 <div className="flex flex-col gap-2 w-[50%] bg-gray-800 rounded-lg outline outline-gray-400 text-xl text-gray-200 p-3 pointer-events-auto">

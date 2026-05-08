@@ -7,7 +7,7 @@ interface CheckboxProps {
     updateSelectedCategories: (value: string) => void;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({ label, isChecked, updateSelectedCategories }) => {
+const Checkbox = ({ label, isChecked, updateSelectedCategories }: CheckboxProps) => {
     const handleChanged = (value: string) => {
         updateSelectedCategories(value);
     };

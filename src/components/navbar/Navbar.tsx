@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
     const handleShoppingCartClicked = () => setShoppingCartActive(prev => !prev);
     
     // The tiny numbered dot that appears on top of the shopping cart symbol when it holds items
-    const CartNumberedCircle: React.FC<{number: number}> = ({ number }) => {
+    const CartNumberedCircle = ({ number }: {number: number}) => {
         if (number === 0) return null;
         return (
             <span className={`

@@ -1,6 +1,6 @@
 import type { Product } from "../../types/Types";
 
-const ProductCard: React.FC<Product> = ({ title, price, category, image, rating }) => {
+const ProductCard = ({ title, price, category, image, rating }: Product) => {
     return (
         <div className="flex flex-col h-64 gap-3 bg-white rounded-lg outline outline-gray-300 hover:outline-yellow-500 shadow-lg text-xs text-left p-3">
             <div className="h-[40%] flex justify-center rounded-sm bg-white">

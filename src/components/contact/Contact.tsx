@@ -98,7 +98,7 @@ const sections: ContentSection[] = [
     }
 ];
 
-const Contact: React.FC = () => {
+const Contact = () => {
     return (
         <div className="relative flex-1 min-h-0 overflow-y-auto">
             <div className="flex flex-col gap-8 p-8 md:p-10">

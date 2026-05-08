@@ -5,7 +5,7 @@ interface DropdownCollectionProps {
     children?: React.ReactNode
 }
 
-const DropdownCollection: React.FC<DropdownCollectionProps> = ({ children }) => {
+const DropdownCollection = ({ children }: DropdownCollectionProps) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (

@@ -9,7 +9,7 @@ interface ChevronCircleProps {
  * @param isOpen - whether the connected element is open or not, state in parent
  * @param onClick - function that is called when chevron is clicked
  */
-const ChevronCircle: React.FC<ChevronCircleProps> = ({ isOpen, onClick }) => {
+const ChevronCircle = ({ isOpen, onClick }: ChevronCircleProps) => {
     return (
         <span className={`
             absolute 

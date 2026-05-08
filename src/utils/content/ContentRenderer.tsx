@@ -1,7 +1,7 @@
 import ContentSectionRenderer from "./ContentSectionRenderer"
 import type { ContentSection } from "./types/types";
 
-const ContentRenderer: React.FC<{ sections: ContentSection[] }> = ({ sections }) => {
+const ContentRenderer = ({ sections }: { sections: ContentSection[] }) => {
     return (
         sections.map(section => (
             <ContentSectionRenderer
